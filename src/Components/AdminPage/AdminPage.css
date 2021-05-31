@@ -1,0 +1,19 @@
+.admin-div{
+    padding: 2rem;
+    text-align: center;
+}
+
+h3{
+    color:coral;
+}
+
+.supplier-show{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 0.5rem;
+    justify-content:space-evenly
+}
+
+.cards{
+    text-align:center;
+}
