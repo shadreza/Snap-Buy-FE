@@ -25,7 +25,7 @@ li {
   list-style-type: none;
   margin: 0 1rem;
   cursor: pointer;
-  text-decoration: none;
+  color: white;
 }
 
 .pointer-cursor {
@@ -44,4 +44,8 @@ li:hover {
   width: 35px;
   height: 35px;
   border-radius: 100%;
+}
+
+Link {
+  text-decoration: none;
 }

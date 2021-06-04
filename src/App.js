@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button, Form, FormControl, InputGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -20,15 +19,21 @@ function App() {
           <div className="navbar-links">
             <div className="just-links">
               <ul className="links">
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/catagory">Categories</Link>
-                </li>
-                <li>
-                  <Link to="contact">Contact us</Link>
-                </li>
+                <Link to="/">
+                  <li>
+                    Home
+                  </li>
+                </Link>
+                <Link to="/catagory">
+                  <li>
+                  Categories
+                  </li>
+                </Link>
+                <Link to="contact">
+                  <li>
+                  Contact us
+                  </li>
+                </Link>
               </ul>
             </div>
             <div className="profile-link">
