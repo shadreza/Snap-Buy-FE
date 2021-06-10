@@ -26,6 +26,11 @@ li {
   margin: 0 1rem;
   cursor: pointer;
   color: white;
+  text-decoration: none;
+}
+
+Link {
+  text-decoration: none;
 }
 
 .pointer-cursor {
@@ -34,6 +39,11 @@ li {
 
 li:hover {
   color: aqua;
+  text-decoration: none;
+}
+
+.logo {
+  color: white;
 }
 
 .logo:hover {
@@ -46,6 +56,8 @@ li:hover {
   border-radius: 100%;
 }
 
-Link {
-  text-decoration: none;
+.profile-img:hover {
+  border: 4px solid orange;
+  width: 34px;
+  height: 34px;
 }

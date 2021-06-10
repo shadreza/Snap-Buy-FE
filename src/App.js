@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {createContext , useState} from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,56 +6,80 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import userPic from './Components/Images/user.png'
 import Homepage from './Components/Homepage/Homepage';
+import Category from './Components/Category/Category';
+import Profile from './Components/Profile/Profile';
+import Contact from './Components/Contact/Contact';
+
+export const UserContext = React.createContext()
 
 function App() {
+
+  const [user, setUser] = useState({
+    name       : 'default',
+    email      : 'default@example.com',
+    image      : {userPic},
+    isLoggedIn : true,
+    position   : 'admin'
+  })
+
   return (
     <Router>
-      <div className="App">
-        <section className="navbar-section">
-          <div className="navbar-logo">
-            <h3 className="logo pointer-cursor">Snap Buy</h3>
-          </div>
-          <div className="navbar-links">
-            <div className="just-links">
-              <ul className="links">
-                <Link to="/">
-                  <li>
-                    Home
-                  </li>
-                </Link>
-                <Link to="/catagory">
-                  <li>
-                  Categories
-                  </li>
-                </Link>
-                <Link to="contact">
-                  <li>
-                  Contact us
-                  </li>
-                </Link>
-              </ul>
+      <UserContext.Provider value={[user,setUser]}>
+        <div className="App">
+          <section className="navbar-section">
+            <div className="navbar-logo">
+              <Link to="/">
+                <h3 className="logo pointer-cursor">Snap Buy</h3>
+              </Link>
             </div>
-            <div className="profile-link">
-              <img className="profile-img pointer-cursor" src="https://gawler.org/wp-content/uploads/2018/06/Male-BOM-Profile-1024x1024.jpg" alt="your profile" />
+            <div className="navbar-links">
+              <div className="just-links">
+                <ul className="links">
+                  <Link to="/">
+                    <li>
+                      Home
+                    </li>
+                  </Link>
+                  <Link to="/catagory">
+                    <li>
+                    Categories
+                    </li>
+                  </Link>
+                  <Link to="/contact">
+                    <li>
+                    Contact us
+                    </li>
+                  </Link>
+                </ul>
+              </div>
+              <div className="profile-link">
+                <Link to="/profile">
+                  <img className="profile-img pointer-cursor" src={userPic} alt="profile" />
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
-      <Switch>
-        <Route path="/home">
-          <Homepage />
-        </Route>
-        <Route path="/catagory">
-          
-        </Route>
-        <Route path="/contact">
-          
-        </Route>
-        <Route path="/">
-          <Homepage />
-        </Route>
-      </Switch>
+          </section>
+        </div>
+        <Switch>
+          <Route path="/home">
+            <Homepage />
+          </Route>
+          <Route path="/catagory">
+            <Category />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/">
+            <Homepage />
+          </Route>
+        </Switch>
+      </UserContext.Provider>
     </Router>
   );
 }

@@ -1,69 +1,84 @@
 import React, { useEffect, useState } from 'react';
 import './AdminPage.css';
-import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css";
 import axios from 'axios';
-import { Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const AdminPage = () => {
 
-    const [gotSupplierData , setGotSupplierData] = useState([]);
+    // const [gotSupplierData , setGotSupplierData] = useState([]);
 
 
-    useEffect(() => {
-        axios.get("http://localhost:3001/api/get/supplier").then((response) => {
-            setGotSupplierData(response.data);
-        });
-      }, []);
+    // useEffect(() => {
+    //     axios.get("http://localhost:3001/api/get/supplier").then((response) => {
+    //         setGotSupplierData(response.data);
+    //     });
+    //   }, []);
 
-    // const [supplierInfo , setSupplierInfo] = useState({
-    //     supplier_Id :                  '',
-    //     supplier_Name :                '',
-    //     supplier_Mail :                '',
-    //     supplier_Phone_Number :        '',
-    //     supplier_Address_House_No :    '',
-    //     supplier_Address_Street_No :   '',
-    //     supplier_Address_Postal_Code : ''
-    // });
+    // // const [supplierInfo , setSupplierInfo] = useState({
+    // //     supplier_Id :                  '',
+    // //     supplier_Name :                '',
+    // //     supplier_Mail :                '',
+    // //     supplier_Phone_Number :        '',
+    // //     supplier_Address_House_No :    '',
+    // //     supplier_Address_Street_No :   '',
+    // //     supplier_Address_Postal_Code : ''
+    // // });
 
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
         
-        const ID = document.getElementById('ID').value.trim().toLowerCase();
-        const firstName = document.getElementById('first_name').value.trim().toLowerCase();
-        const lastName = document.getElementById('last_name').value.trim().toLowerCase();
-        const mail = document.getElementById('mail').value.trim().toLowerCase();
-        const phnNumber = document.getElementById('phoneNumber').value.trim().toLowerCase();
-        const houseNo = document.getElementById('houseNo').value.trim().toLowerCase();
-        const streetNo = document.getElementById('streetNo').value.trim().toLowerCase();
-        const postalCode = document.getElementById('postalCode').value.trim().toLowerCase();
+    //     const ID = document.getElementById('ID').value.trim().toLowerCase();
+    //     const firstName = document.getElementById('first_name').value.trim().toLowerCase();
+    //     const lastName = document.getElementById('last_name').value.trim().toLowerCase();
+    //     const mail = document.getElementById('mail').value.trim().toLowerCase();
+    //     const phnNumber = document.getElementById('phoneNumber').value.trim().toLowerCase();
+    //     const houseNo = document.getElementById('houseNo').value.trim().toLowerCase();
+    //     const streetNo = document.getElementById('streetNo').value.trim().toLowerCase();
+    //     const postalCode = document.getElementById('postalCode').value.trim().toLowerCase();
 
-        // setSupplierInfo ({
-        //     supplier_Id :                  ID,
-        //     supplier_Name :                firstName + ' ' + lastName,
-        //     supplier_Mail :                mail,
-        //     supplier_Phone_Number :        phnNumber,
-        //     supplier_Address_House_No :    houseNo,
-        //     supplier_Address_Street_No :   streetNo,
-        //     supplier_Address_Postal_Code : postalCode
-        // });
+    //     // setSupplierInfo ({
+    //     //     supplier_Id :                  ID,
+    //     //     supplier_Name :                firstName + ' ' + lastName,
+    //     //     supplier_Mail :                mail,
+    //     //     supplier_Phone_Number :        phnNumber,
+    //     //     supplier_Address_House_No :    houseNo,
+    //     //     supplier_Address_Street_No :   streetNo,
+    //     //     supplier_Address_Postal_Code : postalCode
+    //     // });
 
-        axios.post("http://localhost:3001/api/insert/supplier", {
-            id:     ID,
-            name:   firstName + ' ' + lastName,
-            mail:   mail,
-            phone:  phnNumber,
-            house:  houseNo,
-            street: streetNo,
-            postal: postalCode,
-            });
+    //     axios.post("http://localhost:3001/api/insert/supplier", {
+    //         id:     ID,
+    //         name:   firstName + ' ' + lastName,
+    //         mail:   mail,
+    //         phone:  phnNumber,
+    //         house:  houseNo,
+    //         street: streetNo,
+    //         postal: postalCode,
+    //         });
 
-        // e.preventDefault();
-    }
+    //     // e.preventDefault();
+    // }
 
     return (
         <div className="admin-div">
-            <h3>Admin Adds Supplier</h3>
+            <div className="left-pannel">
+                <div className="left-header">
+                    <h5>Menus</h5>
+                </div>
+                <div className="left-options">
+                    <button>Manage Admin</button>
+                    <button>Manage Product</button>
+                    <button>Manage Employee</button>
+                    <button>Manage Supplier</button>
+                    <Button variant="primary">Primary</Button>
+                </div>
+            </div>
+
+            <div className="right-pannel">
+
+            </div>
+
+            {/* <h3>Admin Adds Supplier</h3>
             <br />
             <div className="form-div">
                 <div className="row">
@@ -131,7 +146,9 @@ const AdminPage = () => {
                       </Card>
                     );
                 })}
-            </div>
+            </div> */}
+
+
         </div>
     );
 };

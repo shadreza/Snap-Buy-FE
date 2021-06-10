@@ -1,19 +1,41 @@
-.admin-div{
-    padding: 2rem;
+.admin-div {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: 19% 80%;
+    grid-gap: 1%;
+    justify-content: space-evenly;
+    height : 100vh;
+}
+
+.left-pannel {
+    padding: 0.5rem;
+    background: #000;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.right-pannel {
+    padding: 1rem;
+    background: darkorange;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.left-header {
+    color: white;
     text-align: center;
 }
 
-h3{
-    color:coral;
-}
-
-.supplier-show{
+.left-options {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 0.5rem;
-    justify-content:space-evenly
+    grid-template-columns: auto;
+    margin-top: 10%;
+    grid-gap: 1rem;
+    padding: 0.5rem;
 }
 
-.cards{
-    text-align:center;
+.left-options button {
+    font-size: 16px;
+    font-weight: 'bold';
+    width:auto;
 }
