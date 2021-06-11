@@ -49,6 +49,10 @@
     background: #ffc107;
 }
 
-.option-btn:focus {
+.selectedID {
+    background: #c6ffc1;
+}
+
+.selectedID:hover {
     background: #c6ffc1;
 }
