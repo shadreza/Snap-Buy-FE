@@ -32,10 +32,23 @@
     margin-top: 10%;
     grid-gap: 1rem;
     padding: 0.5rem;
+    justify-content: center;
 }
 
-.left-options button {
+.option-btn {
     font-size: 16px;
     font-weight: 'bold';
-    width:auto;
+    width: auto;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background: #dbe6fd;
+    border: none;
+}
+
+.option-btn:hover {
+    background: #ffc107;
+}
+
+.option-btn:focus {
+    background: #c6ffc1;
 }
