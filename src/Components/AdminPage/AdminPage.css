@@ -19,6 +19,9 @@
     background: darkorange;
     height: 100%;
     border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
 }
 
 .left-header {
@@ -55,4 +58,15 @@
 
 .selectedID:hover {
     background: #c6ffc1;
+}
+
+.inside-left-pannel {
+    position: fixed;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 1rem;
+    padding: 0.5rem;
+    justify-content: center;
+    text-align: center;
+    margin-left: 2.5%;
 }

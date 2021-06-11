@@ -1,0 +1,68 @@
+.manageSuppliers-main-div {
+    width: 100%;
+    margin-top: 10%;
+}
+
+.manage-suppliers-header {
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+p {
+    font-size: 20px;
+    color:floralwhite;
+    font-weight: 700;
+}
+
+input {
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    width: 25rem;
+    font-size: 18px;
+    color: #343f56;
+    padding: 10px;
+}
+
+#button-add-supplier {
+    margin: 0 auto;
+    width: auto;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-form {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content:center;
+}
+
+.current-suppliers {
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 1rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.all-suppliers {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.all-suppliers>p {
+    width: 300px;
+}
+
+.add-another-suppliers {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.add-another-suppliers>h3 { 
+    color: blueviolet;
+}
