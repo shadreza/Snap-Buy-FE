@@ -12,6 +12,10 @@ const ManageSuppliers = () => {
         });
     }, []);
 
+    const cancelSupplier = (e) => {
+        // the e.target.value will get the id of the supplier and this will be deleted from the table.
+    }
+
     const handleSubmit = (e) => {
         
         const ID = document.getElementById('ID').value.trim().toLowerCase();
@@ -45,12 +49,26 @@ const ManageSuppliers = () => {
                     <h3>Connected Suppliers</h3>
                 </div>
                 <div className="all-suppliers">
-                    <p>1</p>
-                    <p>1</p>
-                    <p>1</p>
-                    <p>1</p>
-                    <p>1</p>
-                    <p>1</p>
+                    <div className="supplier-card">
+                        <p>Supplier 1</p>
+                        <button value="suppleir.id" onClick={(e)=>cancelSupplier(e)}>Cancel Supplier</button>
+                    </div>
+                    <div className="supplier-card">
+                        <p>Supplier 1</p>
+                        <button  value="suppleir.id" onClick={(e)=>cancelSupplier(e)}>Cancel Supplier</button>
+                    </div>
+                    <div className="supplier-card">
+                        <p>Supplier 1</p>
+                        <button value="suppleir.id" onClick={(e)=>cancelSupplier(e)}>Cancel Supplier</button>
+                    </div>
+                    <div className="supplier-card">
+                        <p>Supplier 1</p>
+                        <button value="suppleir.id" onClick={(e)=>cancelSupplier(e)}>Cancel Supplier</button>
+                    </div>
+                    <div className="supplier-card">
+                        <p>Supplier 1</p>
+                        <button value="suppleir.id" onClick={(e)=>cancelSupplier(e)}>Cancel Supplier</button>
+                    </div>
                 </div>
             </div>
             <div className="add-another-suppliers">
@@ -106,7 +124,7 @@ const ManageSuppliers = () => {
                             <br /><br />
                         </div>
                     </div>
-                    <button id="button-add-supplier" type="submit" name="action" onClick={e => handleSubmit(e)}>Submit</button>
+                    <button id="button-add-supplier" type="submit" name="action" onClick={e => handleSubmit(e)}>Add Supplier</button>
                 </form>
             </div>
         </div>
