@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { search_product_context } from "../App";
+import { loggedInUser, search_product_context } from "../App";
 import axios from "axios";
 import { HiSearch } from "react-icons/hi";
 import "./Header.css";
@@ -9,8 +9,9 @@ import { MdForum } from "react-icons/md";
 import { BsPersonFill } from "react-icons/bs";
 import { IoMdBasket } from "react-icons/io";
 import styled from "styled-components";
-import { useStateValue } from "../StateProvider";
+// import { useStateValue } from "../StateProvider";
 import { auth } from "../Authentication/firebase";
+
 
 function Header({ searchTerm, handleChange }) {
   const NavMenu = styled.div`
@@ -22,6 +23,8 @@ function Header({ searchTerm, handleChange }) {
     }
   `;
 
+    const  user= useContext (loggedInUser);
+
   const [visibleHeadermenu, setVisibleHeadermenu] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -32,11 +35,17 @@ function Header({ searchTerm, handleChange }) {
       }
     });
   }, []);
-  const [{ cart, user }, dispatch] = useStateValue();
+  // const [{ cart, user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
-    if (user) {
+    if (user[0]) {
       auth.signOut();
+      user[1]({
+        name  : '',
+        email : '',
+        phone : 123123,
+        image : ''
+      })
     }
   };
   const handleSearch = () => {
@@ -91,14 +100,17 @@ function Header({ searchTerm, handleChange }) {
             </div>
           </Link> */}
           <Link
-            to="/"
+            to="/signin"
             // to={!user && "/signin"}
             // style={{ textDecoration: "none" }}
             activeStyle
           >
             <div className="header__icon" onClick={handleAuthenticaton}>
+              {
+                user[0].email && <p id="mailOfUser">{user[0].email}</p>
+              }
               <BsPersonFill style={{ color: "white", fontSize: "20px" }} />
-              <p className="line">{user ? "Sign Out" : "Sign In"}</p>
+              <p className="line">{user[0].email ? "Sign Out" : "Sign In"}</p>
             </div>
           </Link>
 

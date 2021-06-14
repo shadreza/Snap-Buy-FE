@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import M from "materialize-css";
 import { Card } from "react-bootstrap";
 import { ImSearch } from "react-icons/im";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast} from "react-toastify";
 import "./Customer.css";
 import axios from "axios";
 import Admin_Sidebar from "./Admin_Sidebar.js";
@@ -15,7 +16,7 @@ const Customer = () => {
       .toLowerCase();
 
     if (customer_value.length === 0) {
-      M.toast({ html: "Search Something", classes: "red rounded" });
+      toast.error( "Search Something", {position: "top-center"} );
     } else {
       console.log("what i am basically searching is ", customer_value);
       axios
@@ -26,7 +27,7 @@ const Customer = () => {
     }
   };
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="customer__info">
         <h3>Customer Information</h3>
@@ -88,7 +89,8 @@ const Customer = () => {
             })}
         </div>
       </div>
-    </>
+      <ToastContainer autoClose={1500} />
+    </div>
   );
 };
 

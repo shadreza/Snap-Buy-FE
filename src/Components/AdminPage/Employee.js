@@ -194,7 +194,7 @@ const Employee = () => {
     }
   };
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="employee">
         <h2>Employee</h2>
@@ -301,7 +301,7 @@ const Employee = () => {
         </div>
       </div>
       <ToastContainer autoClose={1500} />
-    </>
+    </div>
   );
 };
 

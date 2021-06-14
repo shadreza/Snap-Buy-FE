@@ -18,7 +18,7 @@ const Home = () => {
   const search_value = useContext(search_product_context);
 
   return (
-    <>
+    <div>
       <Header />
       {search_value[0].length === 0 ? (
         <div className="home_div">
@@ -61,7 +61,7 @@ const Home = () => {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -44,7 +44,7 @@ const SubMenu = ({ item }) => {
   const showSubnav = () => setSubnav(!subnav);
 
   return (
-    <>
+    <div>
       <SidebarLink onClick={item.subNav && showSubnav}>
         <div>
           <Link to={item.path}>
@@ -69,7 +69,7 @@ const SubMenu = ({ item }) => {
             </DropdownLink>
           );
         })}
-    </>
+    </div>
   );
 };
 

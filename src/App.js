@@ -18,35 +18,38 @@ import { useStateValue } from "./StateProvider";
 
 
 export const search_product_context = createContext();
+export const loggedInUser = createContext();
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  // const [{}, dispatch] = useStateValue();
   
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      console.log("THE USER IS >>> ", authUser);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((authUser) => {
+  //     console.log("THE USER IS >>> ", authUser);
 
-      if (authUser) {
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
-      } else {
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-      }
+  //     if (authUser) {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         user: authUser,
+  //       });
+  //     } else {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         user: null,
+  //       });
+  //     }
 
       
-    });
-  }, []);
+  //   });
+  // }, []);
   const [searchProduct, setSearchProduct] = useState([]);
+  const [loggedUser, setLoggedUser] = useState({});
   return (
     <Router>
       <search_product_context.Provider
         value={[searchProduct, setSearchProduct]}
       >
+        <loggedInUser.Provider value={[loggedUser, setLoggedUser]}>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/sidebar" component={Admin_Sidebar} />
@@ -65,6 +68,7 @@ function App() {
             component={Get_Cust_Name_From_Order_Id}
           />
         </Switch>
+        </loggedInUser.Provider>
       </search_product_context.Provider>
     </Router>
   );

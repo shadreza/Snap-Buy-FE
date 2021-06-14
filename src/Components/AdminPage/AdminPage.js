@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './AdminPage.css';
-import M from "materialize-css";
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
 

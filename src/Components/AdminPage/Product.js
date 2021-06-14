@@ -114,7 +114,7 @@ const ManageProducts = () => {
   const { register, handleSubmit, watch, formState } = useForm();
 
   return (
-    <>
+    <div>
       <div className="employee">
         <h2>Add Another Product</h2>
         <div className="ui equal width form" id="employee_form">
@@ -206,7 +206,7 @@ const ManageProducts = () => {
         </div>
       </div>
       <ToastContainer autoClose={1500} />
-    </>
+    </div>
   );
 };
 

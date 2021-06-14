@@ -3,7 +3,7 @@ import SubMenu from "./SubMenu";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
+// import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 import * as IoIcons from "react-icons/io";
 import * as RiIcons from "react-icons/ri";
@@ -50,7 +50,7 @@ const Admin_Sidebar = () => {
     {
       title: "Overview",
       path: "/overview",
-      icon: <AiIcons.AiFillHome />,
+      // icon: <AiIcons.AiFillHome />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />,
 
@@ -161,7 +161,7 @@ const Admin_Sidebar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
-    <>
+    <div>
       <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
           <NavIcon to="#">
@@ -171,7 +171,7 @@ const Admin_Sidebar = () => {
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
             <NavIcon to="#">
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
+              <FaIcons.FaBars onClick={showSidebar} />
             </NavIcon>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
@@ -179,7 +179,7 @@ const Admin_Sidebar = () => {
           </SidebarWrap>
         </SidebarNav>
       </IconContext.Provider>
-    </>
+    </div>
   );
 };
 

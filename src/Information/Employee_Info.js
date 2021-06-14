@@ -67,7 +67,7 @@ const Employee_Info = () => {
   };
 
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="employee_info">
         <Input type="text" placeholder="Search..." id="employee_input" action>
@@ -108,7 +108,7 @@ const Employee_Info = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
