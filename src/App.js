@@ -6,13 +6,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import userPic from './Components/Images/user.png'
+import userPic from './Components/Images/user.png';
 import Homepage from './Components/Homepage/Homepage';
 import Category from './Components/Category/Category';
 import Profile from './Components/Profile/Profile';
 import Contact from './Components/Contact/Contact';
+import SignInOrUp from './Components/SignInOrUp/SignInOrUp';
 
-export const UserContext = React.createContext()
+export const UserContext = createContext();
 
 function App() {
 
@@ -52,6 +53,11 @@ function App() {
                     Contact us
                     </li>
                   </Link>
+                  <Link to="/login">
+                    <li>
+                    Log In
+                    </li>
+                  </Link>
                 </ul>
               </div>
               <div className="profile-link">
@@ -74,6 +80,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/login">
+            <SignInOrUp />
           </Route>
           <Route path="/">
             <Homepage />
