@@ -1,0 +1,18 @@
+.customer__info {
+  align-items: center;
+  text-align: center;
+  width: 70%;
+  margin:auto
+}
+.customer__input {
+  display: flex;
+  margin: 0px;
+  margin: auto;
+}
+.icon{
+    font-size: 30px;
+    background-color: cornsilk;
+    margin:10px;
+    border: 2px solid black;
+    border-radius: 50%;
+}

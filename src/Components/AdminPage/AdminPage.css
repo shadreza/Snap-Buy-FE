@@ -1,19 +1,27 @@
-.admin-div{
-    padding: 2rem;
-    text-align: center;
+.admin-div {
+  padding: 2rem;
+  text-align: center;
 }
 
-h3{
-    color:coral;
+h3 {
+  color: coral;
 }
 
-.supplier-show{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 0.5rem;
-    justify-content:space-evenly
+.supplier-show {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0.5rem;
+  justify-content: space-evenly;
 }
 
-.cards{
-    text-align:center;
+.cards {
+  text-align: center;
+}
+
+#toast-container {
+  max-width: 300px !important;
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 100;
 }

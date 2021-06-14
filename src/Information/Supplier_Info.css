@@ -1,0 +1,27 @@
+.supplier_info {
+  display: block;
+  text-align: center!important;
+  margin:20px!important;
+}
+
+.search_input {
+  margin: auto;
+  display: flex;
+  justify-content: center !important;
+  width: 1200px !important;
+  color: none;
+  background-color: none !important;
+}
+.icon {
+  background-color: transparent;
+  border: none;
+}
+.ui.selection.dropdown {
+  width: 100px !important;
+  background-color: transparent;
+}
+
+#supplier_options {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  outline: none;
+}
