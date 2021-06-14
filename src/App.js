@@ -12,6 +12,8 @@ import Category from './Components/Category/Category';
 import Profile from './Components/Profile/Profile';
 import Contact from './Components/Contact/Contact';
 import SignInOrUp from './Components/SignInOrUp/SignInOrUp';
+import SignUp from './Components/SignUp/SignUp';
+import LogIn from './Components/LogIn/LogIn';
 
 export const UserContext = createContext();
 
@@ -82,7 +84,10 @@ function App() {
             <Profile />
           </Route>
           <Route path="/login">
-            <SignInOrUp />
+            <LogIn />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
           </Route>
           <Route path="/">
             <Homepage />
