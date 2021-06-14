@@ -1,0 +1,16 @@
+/* .home_div {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 1rem;
+  justify-content: space-around;
+  padding: 1rem;
+  margin-top:4rem;
+} */
+.home_div{
+  display:flex;
+  flex-wrap:wrap;
+  margin:20px!important;
+  padding:30px;
+  justify-content: space-evenly;
+  max-height:200px!important;
+}

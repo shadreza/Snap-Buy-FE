@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './AdminPage.css';
-import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css";
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
@@ -27,7 +26,7 @@ const AdminPage = () => {
     // });
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => {        
         
         const ID = document.getElementById('ID').value.trim().toLowerCase();
         const firstName = document.getElementById('first_name').value.trim().toLowerCase();
@@ -58,7 +57,7 @@ const AdminPage = () => {
             postal: postalCode,
             });
 
-        // e.preventDefault();
+        //e.preventDefault();
     }
 
     return (
@@ -70,11 +69,11 @@ const AdminPage = () => {
                     <form className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
-                        <input placeholder="First Name" id="first_name" type="text" className="validate"/>
+                        <input id="first_name" type="text" className="validate"/>
                         <label htmlFor="first_name">First Name</label>
                         </div>
                         <div className="input-field col s6">
-                        <input placeholder="Last Name" id="last_name" type="text" className="validate"/>
+                        <input id="last_name" type="text" className="validate"/>
                         <label htmlFor="last_name">Last Name</label>
                         </div>
                     </div>
@@ -98,15 +97,15 @@ const AdminPage = () => {
                     </div>
                     <div className="row">
                         <div className="input-field col s4">
-                        <input placeholder="House No" id="houseNo" type="text" className="validate"/>
+                        <input id="houseNo" type="text" className="validate"/>
                         <label htmlFor="houseNo">House No</label>
                         </div>
                         <div className="input-field col s4">
-                        <input placeholder="Street No" id="streetNo" type="text" className="validate"/>
+                        <input id="streetNo" type="text" className="validate"/>
                         <label htmlFor="streetNo">Street No</label>
                         </div>
                         <div className="input-field col s4">
-                        <input placeholder="Postal Code" id="postalCode" type="text" className="validate"/>
+                        <input id="postalCode" type="text" className="validate"/>
                         <label htmlFor="postalCode">Postal Code</label>
                         </div>
                     </div>
@@ -124,6 +123,8 @@ const AdminPage = () => {
                             <Card.Body className='cards'>
                                 <Card.Title>{item.SUPPLIER_NAME}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{item.SUPPLIER_MAIL}</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted">{item.SUPPLIER_PHONE}</Card.Subtitle>
+
                                 <Card.Text>
                                     {item.SUPPLIER_ADDRESS.HOUSE_NO + ' ' + item.SUPPLIER_ADDRESS.STREET_NO + ' ' + item.SUPPLIER_ADDRESS.POSTAL_CODE}
                                 </Card.Text>
