@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ManageAdmin from '../ManageAdmin/ManageAdmin';
+import DisplayAll from '../DisplayAll/DisplayAll';
 import ManageEmployee from '../ManageEmployee/ManageEmployee';
 import ManageProducts from '../ManageProducts/ManageProducts';
 import ManageSuppliers from '../ManageSuppliers/ManageSuppliers';
@@ -7,7 +7,7 @@ import './AdminPage.css';
 
 const AdminPage = () => {
 
-    const [selectedButton , setSelectdButton] = useState('admin')
+    const [selectedButton , setSelectdButton] = useState('display-all')
 
     const handleButtonClick = (e) => {
         let idName;
@@ -29,7 +29,7 @@ const AdminPage = () => {
                     </div>
 
                     <div className="left-options">
-                        <button className="option-btn selectedID" id="admin-btn" value="admin" onClick={(e)=>handleButtonClick(e)}>Manage Admin</button>
+                        <button className="option-btn selectedID" id="display-all-btn" value="display-all" onClick={(e)=>handleButtonClick(e)}>Display All</button>
                         <button className="option-btn" id="product-btn" value="product" onClick={(e)=>handleButtonClick(e)}>Manage Product</button>
                         <button className="option-btn" id="employee-btn" value="employee" onClick={(e)=>handleButtonClick(e)}>Manage Employee</button>
                         <button className="option-btn" id="supplier-btn" value="supplier" onClick={(e)=>handleButtonClick(e)}>Manage Supplier</button>
@@ -39,24 +39,21 @@ const AdminPage = () => {
 
             <div className="right-pannel">
                 {
-                    selectedButton === 'admin' ?
-                        <ManageAdmin />
-                        :
                         selectedButton === 'employee' ?
                             <ManageEmployee />
                             :
                             selectedButton === 'product' ?
                                 <ManageProducts />
                                 :
-                                selectedButton === 'product' ?
-                                    <ManageProducts />
+                                selectedButton === 'supplier' ?
+                                    <ManageSuppliers />
                                     :
-                                    selectedButton === 'supplier' ?
-                                        <ManageSuppliers />
-                                        :
-                                        <div className="default-Div">
-                                            Hello Admin! Click On The Options to manage your Store... 
-                                        </div>
+                                        selectedButton === 'display-all' ?
+                                            <DisplayAll />
+                                            :
+                                                <div className="default-Div">
+                                                    Hello Admin! Click On The Options to manage your Store... 
+                                                </div>
                                         
 
 
