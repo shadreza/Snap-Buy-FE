@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
+import { auth } from "../Authentication/firebase";
 import Navbar from "../Navbar";
 import axios from "axios";
 import "./Home.css";
-import Header from "./Header";
+import Carousel from "./Carousel";
+import Carousel_3slider from "./Carousel_3slider";
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -21,6 +23,8 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <Carousel />
+      <Carousel_3slider />
       <div>
         {search_value[0].length === 0 ? (
           <div className="home_div">
