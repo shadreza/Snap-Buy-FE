@@ -1,6 +1,5 @@
 import firebase from "firebase";
 
-
 // var firebaseConfig = {
 //   apiKey: process.env.FIREBASE_API_KEY,
 //   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -20,5 +19,5 @@ var firebaseConfig = {
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-
+export const db = firebaseApp.firestore();
 export const auth = firebase.auth();

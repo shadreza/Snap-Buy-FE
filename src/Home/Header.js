@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
 import axios from "axios";
-import { HiSearch } from "react-icons/hi";
 import "./Header.css";
 import { NavLink as Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import { MdForum } from "react-icons/md";
 import { BsPersonFill } from "react-icons/bs";
 import { IoMdBasket } from "react-icons/io";
 import styled from "styled-components";
@@ -21,7 +18,7 @@ function Header({ searchTerm, handleChange }) {
       display: flex;
     }
   `;
-
+  let user;
   const [visibleHeadermenu, setVisibleHeadermenu] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -32,12 +29,11 @@ function Header({ searchTerm, handleChange }) {
       }
     });
   }, []);
-  const [{ cart, user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
-    if (user) {
-      auth.signOut();
-    }
+    // if (user) {
+    //   auth.signOut();
+    // }
   };
   const handleSearch = () => {
     const search_val = document
@@ -91,7 +87,7 @@ function Header({ searchTerm, handleChange }) {
             </div>
           </Link> */}
           <Link
-            to="/"
+            to="/signin"
             // to={!user && "/signin"}
             // style={{ textDecoration: "none" }}
             activeStyle
@@ -102,7 +98,7 @@ function Header({ searchTerm, handleChange }) {
             </div>
           </Link>
 
-          <Link to="/" style={{ textDecoration: "none" }} activeStyle>
+          <Link to="/checkout" style={{ textDecoration: "none" }} activeStyle>
             <div className="header__icon" style={{ marginRight: "50px" }}>
               <div style={{ display: "flex" }}>
                 <IoMdBasket
@@ -113,7 +109,7 @@ function Header({ searchTerm, handleChange }) {
                     fontSize: "20px",
                   }}
                 />{" "}
-                <p style={{ color: "white", alignSelf: "center" }}>{0}</p>
+                <p style={{ color: "white", alignSelf: "center" }}></p>
               </div>
               <p className="line">Add to cart</p>
             </div>

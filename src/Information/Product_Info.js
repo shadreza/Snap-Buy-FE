@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import M from "materialize-css";
 import { useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import "./Employee_Info.css";
+import "../Home/Home.css";
 import "semantic-ui-css/semantic.min.css";
 import Admin_Sidebar from "../Components/AdminPage/Admin_Sidebar";
 
 const Product_Info = () => {
   const [getSearchData, setGetSearchData] = useState([]);
+  const [getAllData, setGetAllData] = useState([]);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/api/get/product").then((response) => {
+  //     setGetAllData(response.data);
+  //     console.log(getAllData);
+  //   });
+  // });
   const handleSubmit = () => {
     const selected_option = document
       .getElementById("employee_options")
@@ -20,7 +29,7 @@ const Product_Info = () => {
       .toLowerCase();
     console.log("this is the value  : ", selected_option, " ", search);
     if (search.length === 0) {
-      M.toast({ html: "Search Field is empty!!!", classes: "red rounded" });
+      toast.error("Search Field is empty!!!", { position: "top-center" });
     } else if (selected_option === "name") {
       axios
         .get(`http://localhost:3001/api/get/search_product/name/${search}`)
@@ -51,6 +60,11 @@ const Product_Info = () => {
         });
     }
   };
+  const handleDelete = (delete_id) => {
+    toast.success("Product Deleted Successfully", { position: "top-center" });
+    axios.delete(`http://localhost:3001/api/delete/product/${delete_id}`);
+    window.location.reload();
+  };
 
   return (
     <>
@@ -70,14 +84,31 @@ const Product_Info = () => {
             Search
           </Button>
         </Input>
-        {getSearchData.map((item,index) => {
-          return (
-            <div id={index}>
-              <h2>{item.PRODUCT_ID}</h2>
-              <h2>{item.PRODUCT_NAME}</h2>
-            </div>
-          );
-        })}
+        <div className="home_div">
+          {getSearchData.map((item, index) => {
+            return (
+              <div className="ui card">
+                <div className="image">
+                  <img src={item.PRODUCT_IMAGE} />
+                </div>
+                <div className="content">
+                  <a className="">{item.PRODUCT_NAME}</a>
+                  <div className="meta">
+                    <span className="date">{item.PRODUCT_CATEGORY}</span>
+                  </div>
+                  <div className="description">{item.PRODUCT_PRICE}</div>
+                </div>
+                <button
+                  className="negative ui button"
+                  onClick={() => handleDelete(item.PRODUCT_ID)}
+                >
+                  Remove
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <ToastContainer autoClose={1500}/>
       </div>
     </>
   );

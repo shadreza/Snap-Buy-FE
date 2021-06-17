@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import M from "materialize-css";
-import { Card } from "react-bootstrap";
+import { Card, Toast } from "react-bootstrap";
 import { ImSearch } from "react-icons/im";
-import "./Customer.css";
+import { ToastContainer, toast } from "react-toastify";
+import { Button, Input } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+import "../../Information/Employee_Info.css";
 import axios from "axios";
 import Admin_Sidebar from "./Admin_Sidebar.js";
 
 const Customer = () => {
   const [getSearchData, setGetSearchData] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/get/customer").then((response) => {
+      setGetSearchData(response.data);
+      console.log(getSearchData);
+    });
+  }, []);
   const handleSubmit = () => {
     let customer_value = document
       .getElementById("customer_value")
@@ -15,7 +24,7 @@ const Customer = () => {
       .toLowerCase();
 
     if (customer_value.length === 0) {
-      M.toast({ html: "Search Something", classes: "red rounded" });
+      toast("Search Something", { position: "top-center" });
     } else {
       console.log("what i am basically searching is ", customer_value);
       axios
@@ -28,16 +37,20 @@ const Customer = () => {
   return (
     <>
       <Admin_Sidebar />
-      <div className="customer__info">
+      <div className="employee_info">
         <h3>Customer Information</h3>
-        <div className="customer__input">
-          <input type="text" id="customer_value" />
-          <ImSearch className="icon" onClick={handleSubmit} />
+        <div className="employee_info">
+          <Input type="text" placeholder="Search..." id="customer_value" action>
+            <input />
+            <Button type="submit" onClick={handleSubmit}>
+              Search
+            </Button>
+          </Input>
         </div>
         <div
           style={{
             display: "flex",
-            margin: "10px",
+            margin: "20px",
             justifyContent: "space-evenly",
             flexWrap: "wrap",
           }}
@@ -45,7 +58,15 @@ const Customer = () => {
           {getSearchData &&
             getSearchData.map((item) => {
               return (
-                <Card style={{ width: "18rem" }}>
+                <Card
+                  style={{
+                    width: "40rem",
+                    boxShadow: "5px 10px 18px #888888",
+                    paddingRight: "30px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <Card.Body className="cards">
                     <Card.Title
                       style={{
@@ -80,13 +101,15 @@ const Customer = () => {
                           " " +
                           item.CUST_ADDRESS.POSTAL_CODE}
                       </p>
+                      <br />
                     </Card.Text>
-                    <br />
                   </Card.Body>
+                  <br />
                 </Card>
               );
             })}
         </div>
+        <ToastContainer />
       </div>
     </>
   );
