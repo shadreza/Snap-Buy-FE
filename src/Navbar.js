@@ -56,9 +56,9 @@ const Navbar = () => {
   });
   const { open, dimmer } = state;
 
-  const handleVerticalClick = () => {
-    setVerticalClick(!verticalClick);
-  };
+  // const handleVerticalClick = () => {
+  //   setVerticalClick(!verticalClick);
+  // };
   const history = useHistory();
   const [{ cart, user }, dis] = useStateValue();
   const handleAuthenticaton = (type) => {
@@ -67,7 +67,8 @@ const Navbar = () => {
     if (type === "login") {
       if (user) {
         auth.signOut();
-        toast("Successfully Logged Out!!!", { position: "top-center" });
+        toast.success("Successfully Logged Out!!!", { position: "top-center" });
+        window.location.reload();
       } else {
         history.push("/signin");
       }
@@ -213,20 +214,78 @@ const Navbar = () => {
             </Link>
           </div>
           <Modal.Content>
-            <Link
+            {/* <Link
               to="/signin"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("login")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <BiLogInCircle
+                style={{
+                  marginTop: "3px",
+                  marginRight: "10px",
+                  padding: "0px",
+                  marginLeft: "4px",
+                }}
+              />
+              <p>{user ? "Sign Out" : "LogIn"}</p>
+            </li>
+            {/* </Link> */}
+            {/* <Link
+              to="/profile"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("profile")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <CgProfile
+                style={{
+                  marginTop: "3px",
+                  marginRight: "10px",
+                  padding: "0px",
+                  marginLeft: "4px",
+                }}
+              />
+              <p>My Profile</p>
+            </li>
+            {/* </Link>
+            <Link
+              to="/order_details"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("order_details")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <GiConcreteBag
+                style={{
+                  marginLeft: "4px",
+                  marginTop: "2px",
+                  marginRight: "10px",
+                }}
+              />
+              <p>My Order</p>
+            </li>
+            {/* </Link> */}
+            <Link
+              to="/checkout"
               style={{ textDecoration: "none", color: "grey" }}
             >
               <li>
-                <BiLogInCircle
+                <IoMdBasket
                   style={{
-                    marginTop: "3px",
-                    marginRight: "10px",
-                    padding: "0px",
                     marginLeft: "4px",
+                    marginTop: "2px",
+                    marginRight: "10px",
                   }}
                 />
-                <p>Log In</p>
+                <p>Checkout</p>
               </li>
             </Link>
             <Link
@@ -243,21 +302,6 @@ const Navbar = () => {
                   }}
                 />
                 <p>SignUp</p>
-              </li>
-            </Link>
-            <Link
-              to="/checkout"
-              style={{ textDecoration: "none", color: "grey" }}
-            >
-              <li>
-                <IoMdBasket
-                  style={{
-                    marginLeft: "4px",
-                    marginTop: "2px",
-                    marginRight: "10px",
-                  }}
-                />
-                <p>Checkout</p>
               </li>
             </Link>
           </Modal.Content>
@@ -419,8 +463,8 @@ const Menu = styled.div`
 `;
 
 const Modal_header = styled(Modal)`
-  max-width: 400px;
-  min-width: 350px;
+  max-width: 350px;
+  min-width: 300px;
   position: fixed;
   top: 0;
   left: 100;
@@ -434,13 +478,13 @@ const Modal_header = styled(Modal)`
     padding: 20px;
   }
   .header_modal p {
-    font-size: 25px;
+    font-size: 20px;
     color: black;
   }
 
   li {
     list-style: none;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
     padding: 10px;
@@ -451,7 +495,7 @@ const Modal_header = styled(Modal)`
     &:hover {
       transform: scale(0.96);
       transition: all 0.2s ease-in-out;
-      color: #4caf50;
+      color: #4caf50 !important;
     }
   }
 `;
