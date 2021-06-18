@@ -7,41 +7,41 @@ import Supplier_Info from "./Information/Supplier_Info";
 import Employee_Info from "./Information/Employee_Info";
 import Product_Info from "./Information/Product_Info";
 import Product from "./Components/AdminPage/Product";
-import React, { createContext, useState ,useEffect} from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Admin_login from "./Information/Admin_login";
 import Home from "./Home/Home";
+import Profile from "./User/Profile";
 import Signin from "./Authentication/Signin";
 import Signup from "./Authentication/Signup";
+import Navbar from "./Navbar";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
-
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
 
 function App() {
-  // const [{}, dispatch] = useStateValue();
-  
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((authUser) => {
-  //     console.log("THE USER IS >>> ", authUser);
+  const [{}, dispatch] = useStateValue();
 
-  //     if (authUser) {
-  //       dispatch({
-  //         type: "SET_USER",
-  //         user: authUser,
-  //       });
-  //     } else {
-  //       dispatch({
-  //         type: "SET_USER",
-  //         user: null,
-  //       });
-  //     }
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log("THE USER IS >>> ", authUser.email);
 
-      
-  //   });
-  // }, []);
+      if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser.email,
+        });
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+  }, []);
+
   const [searchProduct, setSearchProduct] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
   return (
@@ -63,6 +63,8 @@ function App() {
           <Route path="/product" component={Product} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/Profile" component={Profile} />
+
           <Route
             path="/get_cust_name_from_order_id"
             component={Get_Cust_Name_From_Order_Id}

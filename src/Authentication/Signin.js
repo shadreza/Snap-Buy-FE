@@ -1,5 +1,6 @@
 import React, { useState , useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
 import { auth } from "./firebase";
 import "./Signin.css";
 import {loggedInUser} from "../App"
@@ -13,7 +14,7 @@ function Signin() {
 
   const signin = (e) => {
     e.preventDefault();
-
+    
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
@@ -27,7 +28,7 @@ function Signin() {
         userInfo[1](USER)
         history.push("/");
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => toast.error(error.message,{position:"top-center"}));
   };
 
   const register = (e) => {
@@ -83,6 +84,7 @@ function Signin() {
           </button>
         </div>
       </div>
+      <ToastContainer autoClose={1400}/>
     </div>
   );
 }
