@@ -19,6 +19,7 @@ import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
 
 export const search_product_context = createContext();
+export const loggedInUser = createContext();
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -42,11 +43,13 @@ function App() {
   }, []);
 
   const [searchProduct, setSearchProduct] = useState([]);
+  const [loggedUser, setLoggedUser] = useState({});
   return (
     <Router>
       <search_product_context.Provider
         value={[searchProduct, setSearchProduct]}
       >
+        <loggedInUser.Provider value={[loggedUser, setLoggedUser]}>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/sidebar" component={Admin_Sidebar} />
@@ -67,6 +70,7 @@ function App() {
             component={Get_Cust_Name_From_Order_Id}
           />
         </Switch>
+        </loggedInUser.Provider>
       </search_product_context.Provider>
     </Router>
   );

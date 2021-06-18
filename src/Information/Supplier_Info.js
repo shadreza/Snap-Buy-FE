@@ -54,7 +54,7 @@ const Supplier_Info = () => {
   };
 
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="supplier_info">
         <Input type="text" placeholder="Search..." id="supplier_input" action>
@@ -80,7 +80,7 @@ const Supplier_Info = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

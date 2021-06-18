@@ -178,7 +178,7 @@ const Supplier = () => {
   };
 
   return (
-    <>
+    <div>
       <Admin_Sidebar className="admin__sidebar" />
       <div className="supplier__page">
         <h2>Supplier</h2>
@@ -273,7 +273,7 @@ const Supplier = () => {
         </div>
       </div>
       <ToastContainer autoClose={1500} />
-    </>
+    </div>
   );
 };
 

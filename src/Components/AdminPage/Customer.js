@@ -35,7 +35,7 @@ const Customer = () => {
     }
   };
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="employee_info">
         <h3>Customer Information</h3>
@@ -111,7 +111,8 @@ const Customer = () => {
         </div>
         <ToastContainer />
       </div>
-    </>
+      <ToastContainer autoClose={1500} />
+    </div>
   );
 };
 
