@@ -36,6 +36,7 @@ const Home = () => {
                 <div className="ui card">
                   <div className="image">
                     <img src={item.PRODUCT_IMAGE} />
+
                   </div>
                   <div className="content">
                     <a className="">{item.PRODUCT_NAME}</a>

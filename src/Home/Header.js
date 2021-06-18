@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { search_product_context } from "../App";
+import { loggedInUser, search_product_context } from "../App";
 import axios from "axios";
 import "./Header.css";
 import { NavLink as Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import { IoMdBasket } from "react-icons/io";
 import styled from "styled-components";
-import { useStateValue } from "../StateProvider";
+// import { useStateValue } from "../StateProvider";
 import { auth } from "../Authentication/firebase";
+
 
 function Header({ searchTerm, handleChange }) {
   const NavMenu = styled.div`
@@ -19,6 +20,7 @@ function Header({ searchTerm, handleChange }) {
     }
   `;
   let user;
+    const  user= useContext (loggedInUser);
   const [visibleHeadermenu, setVisibleHeadermenu] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -31,9 +33,11 @@ function Header({ searchTerm, handleChange }) {
   }, []);
 
   const handleAuthenticaton = () => {
-    // if (user) {
-    //   auth.signOut();
-    // }
+     if (user) {
+       auth.signOut();
+     }
+   const [{ cart, user }, dispatch] = useStateValue();
+
   };
   const handleSearch = () => {
     const search_val = document
@@ -93,8 +97,11 @@ function Header({ searchTerm, handleChange }) {
             activeStyle
           >
             <div className="header__icon" onClick={handleAuthenticaton}>
+              {
+                user[0].email && <p id="mailOfUser">{user[0].email}</p>
+              }
               <BsPersonFill style={{ color: "white", fontSize: "20px" }} />
-              <p className="line">{user ? "Sign Out" : "Sign In"}</p>
+              <p className="line">{user[0].email ? "Sign Out" : "Sign In"}</p>
             </div>
           </Link>
 

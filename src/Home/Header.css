@@ -88,6 +88,10 @@
   height:40px;
 }
 
+#mailOfUser {
+  font: size 14px !important;
+}
+
 .line {
   display: none;
   margin-left: auto;

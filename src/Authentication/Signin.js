@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { ToastContainer,toast } from "react-toastify";
 import { auth } from "./firebase";
 import "./Signin.css";
+import {loggedInUser} from "../App"
 
 function Signin() {
+  
+  const userInfo = useContext(loggedInUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -15,6 +18,14 @@ function Signin() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
+        console.log(auth.user.email);
+        const USER =  {
+          name  : auth.user.displayName,
+          email : auth.user.email,
+          phone : auth.user.phoneNumber,
+          image : auth.user.photoURL
+        }
+        userInfo[1](USER)
         history.push("/");
       })
       .catch((error) => toast.error(error.message,{position:"top-center"}));
@@ -23,6 +34,8 @@ function Signin() {
   const register = (e) => {
     history.push("./signup");
   };
+
+  
 
   return (
     <div>

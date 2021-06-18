@@ -67,7 +67,7 @@ const Product_Info = () => {
   };
 
   return (
-    <>
+    <div>
       <Admin_Sidebar />
       <div className="employee_info">
         <Input type="text" placeholder="Search..." id="employee_input" action>
@@ -110,7 +110,7 @@ const Product_Info = () => {
         </div>
         <ToastContainer autoClose={1500}/>
       </div>
-    </>
+    </div>
   );
 };
 
