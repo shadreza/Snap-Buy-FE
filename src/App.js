@@ -52,6 +52,7 @@ function App() {
         <loggedInUser.Provider value={[loggedUser, setLoggedUser]}>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
           <Route path="/sidebar" component={Admin_Sidebar} />
           <Route path="/info/customer" component={Customer} />
           <Route path="/overview/supplier" component={Supplier} />
