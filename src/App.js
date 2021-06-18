@@ -11,6 +11,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Admin_login from "./Information/Admin_login";
 import Home from "./Home/Home";
+import Profile from "./User/Profile";
 import Signin from "./Authentication/Signin";
 import Signup from "./Authentication/Signup";
 import Navbar from "./Navbar";
@@ -24,10 +25,12 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
+      console.log("THE USER IS >>> ", authUser.email);
+
       if (authUser) {
         dispatch({
           type: "SET_USER",
-          user: authUser,
+          user: authUser.email,
         });
       } else {
         dispatch({
@@ -57,6 +60,8 @@ function App() {
           <Route path="/product" component={Product} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/Profile" component={Profile} />
+
           <Route
             path="/get_cust_name_from_order_id"
             component={Get_Cust_Name_From_Order_Id}

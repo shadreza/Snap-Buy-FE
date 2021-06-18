@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
 import { auth } from "../Authentication/firebase";
+import { useStateValue } from "../StateProvider";
 import Navbar from "../Navbar";
 import axios from "axios";
 import "./Home.css";
@@ -11,15 +12,17 @@ const Home = () => {
   const [count, setCount] = useState(0);
   const [allProduct, setAllProduct] = useState([]);
   const [searchProduct, setSearchProduct] = useState([]);
+  const [{ cart, user }, dispatch] = useStateValue();
+
   useEffect(() => {
     axios.get("http://localhost:3001/api/get/product").then((response) => {
       setAllProduct(response.data);
       console.log(allProduct);
+      console.log("Why i am not getting any values ", user);
     });
   }, []);
 
   const search_value = useContext(search_product_context);
-
   return (
     <>
       <Navbar />

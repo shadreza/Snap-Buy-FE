@@ -1,6 +1,7 @@
 export const initialState = {
   cart: [],
   user: null,
+  
 };
 
 const reducer = (state, action) => {

@@ -15,7 +15,7 @@
 }
 
 .login__box {
-  width: 450px;
+  width: 350px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -44,12 +44,15 @@ h3 {
 }
 
 .login__box form input {
-  height: 30px;
+  height: 35px;
   margin-bottom: 10px;
   background-color: white;
-  width: 97%;
+  width: 100%;
   box-shadow: 2px 0px 6px 1px grey;
   border: none;
+  padding:10px;  
+  font-size:15px;
+  font-weight: 600;
 }
 
 .login__box label {
@@ -84,7 +87,7 @@ h3 {
 }
 .login__signInButton:hover {
   background: white;
-  color: #4caf51;
+  color: black;
 }
 .login__registerButton:hover {
   background: white;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
 import { TiThMenu } from "react-icons/ti";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaFish, FaCarrot, FaUserCircle, FaUserPlus } from "react-icons/fa";
@@ -30,6 +31,8 @@ import { BiCake } from "react-icons/bi";
 import { MdLocalMall } from "react-icons/md";
 import { Input, Button, Modal, Dropdown } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import { auth } from "./Authentication/firebase";
+import { useStateValue } from "./StateProvider";
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -56,6 +59,35 @@ const Navbar = () => {
   const handleVerticalClick = () => {
     setVerticalClick(!verticalClick);
   };
+  const history = useHistory();
+  const [{ cart, user }, dis] = useStateValue();
+  const handleAuthenticaton = (type) => {
+    console.log();
+
+    if (type === "login") {
+      if (user) {
+        auth.signOut();
+        toast("Successfully Logged Out!!!", { position: "top-center" });
+      } else {
+        history.push("/signin");
+      }
+    } else if (type === "profile") {
+      if (user) {
+        history.push("/profile");
+      } else {
+        history.push("/signin");
+        toast("Please LogIn first!!!", { position: "top-center" });
+      }
+    } else if (type === "order_details") {
+      if (user) {
+        history.push("/order_details");
+      } else {
+        history.push("/signin");
+        toast("Please LogIn first!!!", { position: "top-center" });
+      }
+    }
+  };
+
   return (
     <Container>
       <GiHamburgerMenu
@@ -130,21 +162,23 @@ const Navbar = () => {
           </div>
         </Link>
         <Dropdown_Menu show={showDropdown}>
-          <Link to="/signin" style={{ textDecoration: "none", color: "white" }}>
-            <li>LogIn</li>
-          </Link>
-          <Link
+          {/* <Link style={{ textDecoration: "none", color: "white" }}> */}
+          <li onClick={() => handleAuthenticaton("login")}>
+            {user ? "Sign Out" : "LogIn"}
+          </li>
+          {/* </Link> */}
+          {/* <Link
             to="/profile"
             style={{ textDecoration: "none", color: "white" }}
-          >
-            <li>Profile</li>
-          </Link>
+          > */}
+          <li onClick={() => handleAuthenticaton("profile")}>Profile</li>
+          {/* </Link>
           <Link
             to="/order_details"
             style={{ textDecoration: "none", color: "white" }}
-          >
-            <li>My Order</li>
-          </Link>
+          > */}
+          <li onClick={() => handleAuthenticaton("order_details")}>My Order</li>
+          {/* </Link> */}
         </Dropdown_Menu>
         <HiDotsVertical
           className="vertical_icon"
@@ -249,6 +283,7 @@ const Navbar = () => {
           </li>
         </VerticalMenu> */}
       </Menu>
+      <ToastContainer autoClose={1200} />
     </Container>
   );
 };
