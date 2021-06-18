@@ -1,67 +1,78 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
+import { auth } from "../Authentication/firebase";
+import { useStateValue } from "../StateProvider";
+import Navbar from "../Navbar";
 import axios from "axios";
 import "./Home.css";
-import Header from "./Header";
+import Carousel from "./Carousel";
+import Carousel_3slider from "./Carousel_3slider";
 
 const Home = () => {
   const [count, setCount] = useState(0);
   const [allProduct, setAllProduct] = useState([]);
   const [searchProduct, setSearchProduct] = useState([]);
+  const [{ cart, user }, dispatch] = useStateValue();
+
   useEffect(() => {
     axios.get("http://localhost:3001/api/get/product").then((response) => {
       setAllProduct(response.data);
       console.log(allProduct);
+      console.log("Why i am not getting any values ", user);
     });
   }, []);
 
   const search_value = useContext(search_product_context);
-
   return (
-    <div>
-      <Header />
-      {search_value[0].length === 0 ? (
-        <div className="home_div">
-          {allProduct.map((item) => {
-            return (
-              <div className="ui card">
-                <div className="image">
-                  <img src={item.PRODUCT_IMAGE} />
-                </div>
-                <div className="content">
-                  <a className="">{item.PRODUCT_NAME}</a>
-                  <div className="meta">
-                    <span className="date">{item.PRODUCT_CATEGORY}</span>
+    <>
+      <Navbar />
+      <Carousel />
+      <Carousel_3slider />
+      <div>
+        {search_value[0].length === 0 ? (
+          <div className="home_div">
+            {allProduct.map((item) => {
+              return (
+                <div className="ui card">
+                  <div className="image">
+                    <img src={item.PRODUCT_IMAGE} />
+
                   </div>
-                  <div className="description">{item.PRODUCT_PRICE}</div>
-                </div>
-                <button className="positive ui button">Add to cart</button>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="home_div">
-          {search_value[0].map((item) => {
-            return (
-              <div className="ui card">
-                <div className="image">
-                  <img src={item.PRODUCT_IMAGE} />
-                </div>
-                <div className="content">
-                  <a className="">{item.PRODUCT_NAME}</a>
-                  <div className="meta">
-                    <span className="date">{item.PRODUCT_CATEGORY}</span>
+                  <div className="content">
+                    <a className="">{item.PRODUCT_NAME}</a>
+                    <div className="meta">
+                      <span className="date">{item.PRODUCT_CATEGORY}</span>
+                    </div>
+                    <div className="description">{item.PRODUCT_PRICE}</div>
                   </div>
-                  <div className="description">{item.PRODUCT_PRICE}</div>
+                  <button className="positive ui button">Add to cart</button>
                 </div>
-                <button className="positive ui button">Add to cart</button>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="home_div">
+            {search_value[0].map((item) => {
+              return (
+                <div className="ui card">
+                  <div className="image">
+                    <img src={item.PRODUCT_IMAGE} />
+                  </div>
+                  <div className="content">
+                    <a className="">{item.PRODUCT_NAME}</a>
+                    <div className="meta">
+                      <span className="date">{item.PRODUCT_CATEGORY}</span>
+                    </div>
+                    <div className="description">{item.PRODUCT_PRICE}</div>
+                  </div>
+                  <button className="positive ui button">Add to cart</button>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

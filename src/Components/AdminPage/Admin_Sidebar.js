@@ -48,7 +48,7 @@ const SidebarWrap = styled.div`
 const Admin_Sidebar = () => {
   const SidebarData = [
     {
-      title: "Overview",
+      title: "Add",
       path: "/overview",
       // icon: <AiIcons.AiFillHome />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
@@ -58,11 +58,6 @@ const Admin_Sidebar = () => {
         {
           title: "Supplier",
           path: "/overview/supplier",
-          icon: <IoIcons.IoIosPaper />,
-        },
-        {
-          title: "Customer",
-          path: "/overview/customer",
           icon: <IoIcons.IoIosPaper />,
         },
         {
@@ -106,7 +101,7 @@ const Admin_Sidebar = () => {
     },
     {
       title: "Products",
-      path: "/products",
+      path: "/product",
       icon: <FaIcons.FaCartPlus />,
     },
     {

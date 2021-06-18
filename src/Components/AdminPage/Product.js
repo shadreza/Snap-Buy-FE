@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Admin_Sidebar from "./Admin_Sidebar";
 import "semantic-ui-css/semantic.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -114,6 +115,7 @@ const ManageProducts = () => {
   const { register, handleSubmit, watch, formState } = useForm();
 
   return (
+     <Admin_Sidebar/>
     <div>
       <div className="employee">
         <h2>Add Another Product</h2>
