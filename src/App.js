@@ -17,9 +17,11 @@ import Signup from "./Authentication/Signup";
 import Navbar from "./Navbar";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
+import Checkout from "./Components/Checkout/Checkout";
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
+export const basket = createContext();
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -44,33 +46,39 @@ function App() {
 
   const [searchProduct, setSearchProduct] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
+
+  let userInfo = {
+    name       : null,
+    email      : null,
+    phone      : null,
+    image      : null,
+    isSignedIn : false
+  }
+  const [currentBasket, setCurrentBasket] = useState([]);
   return (
     <Router>
-      <search_product_context.Provider
-        value={[searchProduct, setSearchProduct]}
-      >
+      <search_product_context.Provider value={[searchProduct, setSearchProduct]}>
         <loggedInUser.Provider value={[loggedUser, setLoggedUser]}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/sidebar" component={Admin_Sidebar} />
-          <Route path="/info/customer" component={Customer} />
-          <Route path="/overview/supplier" component={Supplier} />
-          <Route path="/overview/employee" component={Employee} />
-          <Route path="/info/supplier" component={Supplier_Info} />
-          <Route path="/info/employee" component={Employee_Info} />
-          <Route path="/info/product" component={Product_Info} />
-          <Route path="/admin_login" component={Admin_login} />
-          <Route path="/product" component={Product} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/Profile" component={Profile} />
-
-          <Route
-            path="/get_cust_name_from_order_id"
-            component={Get_Cust_Name_From_Order_Id}
-          />
-        </Switch>
+          <basket.Provider value={[currentBasket, setCurrentBasket]}>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/home" exact component={Home} />
+              <Route path="/checkout" component={Checkout} />
+              <Route path="/sidebar" component={Admin_Sidebar} />
+              <Route path="/info/customer" component={Customer} />
+              <Route path="/overview/supplier" component={Supplier} />
+              <Route path="/overview/employee" component={Employee} />
+              <Route path="/info/supplier" component={Supplier_Info} />
+              <Route path="/info/employee" component={Employee_Info} />
+              <Route path="/info/product" component={Product_Info} />
+              <Route path="/admin_login" component={Admin_login} />
+              <Route path="/product" component={Product} />
+              <Route path="/signin" component={Signin} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/Profile" component={Profile} />
+              <Route path="/get_cust_name_from_order_id" component={Get_Cust_Name_From_Order_Id} />
+            </Switch>
+          </basket.Provider>
         </loggedInUser.Provider>
       </search_product_context.Provider>
     </Router>

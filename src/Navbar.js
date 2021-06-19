@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
@@ -33,6 +33,7 @@ import { Input, Button, Modal, Dropdown } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
+import { basket } from "./App";
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -44,10 +45,12 @@ function exampleReducer(state, action) {
       throw new Error();
   }
 }
+
 const Navbar = () => {
+
+  const basketContext = useContext(basket);
   const [verticalClick, setVerticalClick] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
-
   const [showDropdown, setShowDropdown] = useState(false);
   // Modal
   const [state, dispatch] = React.useReducer(exampleReducer, {
@@ -59,6 +62,7 @@ const Navbar = () => {
   const handleVerticalClick = () => {
     setVerticalClick(!verticalClick);
   };
+
   const history = useHistory();
   const [{ cart, user }, dis] = useStateValue();
   const handleAuthenticaton = (type) => {
@@ -159,37 +163,21 @@ const Navbar = () => {
         <Link to="/checkout" style={{ textDecoration: "none", color: "white" }}>
           <div className="user_profile">
             <IoMdBasket />
+            <small style={{ marginLeft: "10px" }}>{basketContext[0].length}</small>
           </div>
         </Link>
         <Dropdown_Menu show={showDropdown}>
-          {/* <Link style={{ textDecoration: "none", color: "white" }}> */}
           <li onClick={() => handleAuthenticaton("login")}>
             {user ? "Sign Out" : "LogIn"}
           </li>
-          {/* </Link> */}
-          {/* <Link
-            to="/profile"
-            style={{ textDecoration: "none", color: "white" }}
-          > */}
           <li onClick={() => handleAuthenticaton("profile")}>Profile</li>
-          {/* </Link>
-          <Link
-            to="/order_details"
-            style={{ textDecoration: "none", color: "white" }}
-          > */}
           <li onClick={() => handleAuthenticaton("order_details")}>My Order</li>
-          {/* </Link> */}
         </Dropdown_Menu>
         <HiDotsVertical
           className="vertical_icon"
           onClick={() => dispatch({ type: "OPEN_MODAL", dimmer: "blurring" })}
           style={{ fontSize: "22px", cursor: "pointer", color: "white" }}
         />
-        {/* <Button
-          onClick={() => dispatch({ type: "OPEN_MODAL", dimmer: "blurring" })}
-        >
-          Blurring
-        </Button> */}
         <Modal_header
           dimmer={dimmer}
           open={open}
@@ -261,27 +249,7 @@ const Navbar = () => {
               </li>
             </Link>
           </Modal.Content>
-          {/* <Modal.Actions>
-            <Button negative onClick={() => dispatch({ type: "CLOSE_MODAL" })}>
-              Disagree
-            </Button>
-            <Button positive onClick={() => dispatch({ type: "CLOSE_MODAL" })}>
-              Agree
-            </Button>
-          </Modal.Actions> */}
         </Modal_header>
-        {/* <VerticalMenu show={verticalClick}>
-          <li>
-            <FaUserCircle
-              style={{ marginTop: "3px", marginRight: "10px", padding: "0px" }}
-            />
-            SignIn{" "}
-          </li>
-          <li>
-            <IoMdBasket style={{ marginTop: "2px", marginRight: "10px" }} />
-            Checkout
-          </li>
-        </VerticalMenu> */}
       </Menu>
       <ToastContainer autoClose={1200} />
     </Container>

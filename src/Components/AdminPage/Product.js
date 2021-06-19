@@ -115,8 +115,9 @@ const ManageProducts = () => {
   const { register, handleSubmit, watch, formState } = useForm();
 
   return (
-     <Admin_Sidebar/>
+     
     <div>
+      <Admin_Sidebar/>
       <div className="employee">
         <h2>Add Another Product</h2>
         <div className="ui equal width form" id="employee_form">

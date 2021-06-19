@@ -8,9 +8,11 @@ import { IoMdBasket } from "react-icons/io";
 import styled from "styled-components";
 // import { useStateValue } from "../StateProvider";
 import { auth } from "../Authentication/firebase";
+import history from "material-ui/svg-icons/action/history";
 
 
 function Header({ searchTerm, handleChange }) {
+  
   const NavMenu = styled.div`
     display: flex;
     align-items: center;
@@ -20,7 +22,6 @@ function Header({ searchTerm, handleChange }) {
     }
   `;
   let user;
-    const  user= useContext (loggedInUser);
   const [visibleHeadermenu, setVisibleHeadermenu] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -31,14 +32,25 @@ function Header({ searchTerm, handleChange }) {
       }
     });
   }, []);
-
+  let userInfo = {
+    name       : null,
+    email      : null,
+    phone      : null,
+    image      : null,
+    isSignedIn : false
+  }
   const handleAuthenticaton = () => {
-     if (user) {
+     if (!userLoggedIn[0].isSignedIn) {
        auth.signOut();
+       userLoggedIn[1](userInfo);
+     } else {
+      history.push("/signin");
      }
+     console.log(userLoggedIn[0].isSignedIn)
    const [{ cart, user }, dispatch] = useStateValue();
-
+   history.push("/");
   };
+
   const handleSearch = () => {
     const search_val = document
       .getElementById("search_product")
@@ -82,29 +94,25 @@ function Header({ searchTerm, handleChange }) {
         </div>
       </div>
 
+      <div className="counetr">
+        <p>this is a counter</p>
+      </div>
+
       <NavMenu>
         <div className="header__nav">
-          {/* <Link to="/complain" style={{ textDecoration: "none" }} activeStyle>
-            <div className="header__icon">
-              <MdForum style={{ color: "white", fontSize: "20px" }} />
-              <p className="line">Complain</p>
-            </div>
-          </Link> */}
+          
           <Link
             to="/signin"
-            // to={!user && "/signin"}
-            // style={{ textDecoration: "none" }}
             activeStyle
           >
             <div className="header__icon" onClick={handleAuthenticaton}>
               {
-                user[0].email && <p id="mailOfUser">{user[0].email}</p>
+                userLoggedIn[0].email && <p id="mailOfUser">{userLoggedIn[0].email}</p>
               }
               <BsPersonFill style={{ color: "white", fontSize: "20px" }} />
-              <p className="line">{user[0].email ? "Sign Out" : "Sign In"}</p>
+              <p className="line">{userLoggedIn[0].isSignedIn ? "Sign Out" : "Sign In"}</p>
             </div>
           </Link>
-
           <Link to="/checkout" style={{ textDecoration: "none" }} activeStyle>
             <div className="header__icon" style={{ marginRight: "50px" }}>
               <div style={{ display: "flex" }}>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { search_product_context } from "../App";
-import { auth } from "../Authentication/firebase";
+import { basket, loggedInUser, search_product_context } from "../App";
 import { useStateValue } from "../StateProvider";
 import Navbar from "../Navbar";
 import axios from "axios";
@@ -9,6 +8,10 @@ import Carousel from "./Carousel";
 import Carousel_3slider from "./Carousel_3slider";
 
 const Home = () => {
+
+  const search_value = useContext(search_product_context);
+  const userLoggedIn = useContext(loggedInUser);
+  const basketContext = useContext(basket);
   const [count, setCount] = useState(0);
   const [allProduct, setAllProduct] = useState([]);
   const [searchProduct, setSearchProduct] = useState([]);
@@ -22,7 +25,10 @@ const Home = () => {
     });
   }, []);
 
-  const search_value = useContext(search_product_context);
+  const addToCart = (prd) => {
+    basketContext[1](cart => [...basketContext[0], prd]);
+  }
+
   return (
     <>
       <Navbar />
@@ -36,7 +42,6 @@ const Home = () => {
                 <div className="ui card">
                   <div className="image">
                     <img src={item.PRODUCT_IMAGE} />
-
                   </div>
                   <div className="content">
                     <a className="">{item.PRODUCT_NAME}</a>
@@ -45,7 +50,7 @@ const Home = () => {
                     </div>
                     <div className="description">{item.PRODUCT_PRICE}</div>
                   </div>
-                  <button className="positive ui button">Add to cart</button>
+                  <button className="positive ui button" onClick={()=>{addToCart(item)}}>Add to cart</button>
                 </div>
               );
             })}
@@ -65,7 +70,7 @@ const Home = () => {
                     </div>
                     <div className="description">{item.PRODUCT_PRICE}</div>
                   </div>
-                  <button className="positive ui button">Add to cart</button>
+                  <button className="positive ui button" onClick={()=>{addToCart(item)}}>Add to cart</button>
                 </div>
               );
             })}
