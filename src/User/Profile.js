@@ -11,6 +11,7 @@ const Profile = () => {
   const [{ cart, user }, dis] = useStateValue();
   const [userDetails, setUserDetails] = useState([]);
   const [allCustomer, setAllCustomer] = useState([]);
+  const [previousmail, setPreviousmail] = useState(null);
   const [index, setIndex] = useState(0);
   const [name, setName] = useState(null);
   const [phone, setPhone] = useState(null);
@@ -39,6 +40,7 @@ const Profile = () => {
         setHouse(item.CUST_ADDRESS.HOUSE_NO);
         setStreet(item.CUST_ADDRESS.STREET_NO);
         setPostal(item.CUST_ADDRESS.POSTAL_CODE);
+        setPreviousmail(user);
       }
     });
   }, []);
@@ -75,6 +77,23 @@ const Profile = () => {
     //   .toLowerCase();
     // toast.error("something happening ");
 
+    axios.get("http://localhost:3001/api/get/customer").then((response) => {
+      setAllCustomer(response.data);
+    });
+
+    allCustomer.map((item, index) => {
+      if (item.CUST_MAIL === user) {
+        setName(item.CUST_NAME);
+        setPhone(item.CUST_PHONE);
+        setMail(item.CUST_MAIL);
+        setGender(item.CUST_GENDER);
+        setHouse(item.CUST_ADDRESS.HOUSE_NO);
+        setStreet(item.CUST_ADDRESS.STREET_NO);
+        setPostal(item.CUST_ADDRESS.POSTAL_CODE);
+        setPreviousmail(user);
+      }
+    });
+
     if (name?.length === 0) {
       setName(userDetails[0].CUST_NAME);
     }
@@ -95,6 +114,9 @@ const Profile = () => {
     }
     if (postal?.length === 0) {
       setPostal(userDetails[0].CUST_ADDRESS.POSTAL_CODE);
+    }
+    if (previousmail?.length === 0) {
+      setPreviousmail(userDetails[0].CUST_MAIL);
     }
     if (name?.length < 3) {
     }
@@ -170,7 +192,7 @@ const Profile = () => {
         house: house,
         street: street,
         postal: postal,
-        previous_mail: user,
+        previous_mail: previousmail,
       });
       window.location.reload();
       toast.success("Updated Successfully!!!", {
@@ -270,7 +292,7 @@ const Profile = () => {
                     className="positive ui button"
                     onClick={(e) => handleChange(e)}
                   >
-                    Submit
+                    Update
                   </button>
                 </div>
               </>

@@ -18,25 +18,36 @@ const Home = () => {
     axios.get("http://localhost:3001/api/get/product").then((response) => {
       setAllProduct(response.data);
       console.log(allProduct);
-      console.log("Why i am not getting any values ", user);
     });
   }, []);
+  const [searchTerm, setSearchTerm] = React.useState(null);
+  const [searchResults, setSearchResults] = React.useState([]);
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const results = allProduct.filter((item) =>
+      item.PRODUCT_NAME.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
   const search_value = useContext(search_product_context);
   return (
     <>
-      <Navbar />
+      <Navbar searchTerm={searchTerm} handleChange={handleChange} />
       <Carousel />
       <Carousel_3slider />
       <div>
-        {search_value[0].length === 0 ? (
+        {searchTerm === null ?  (
           <div className="home_div">
             {allProduct.map((item) => {
               return (
                 <div className="ui card">
                   <div className="image">
                     <img src={item.PRODUCT_IMAGE} />
-
                   </div>
                   <div className="content">
                     <a className="">{item.PRODUCT_NAME}</a>
@@ -52,7 +63,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="home_div">
-            {search_value[0].map((item) => {
+            {searchResults.map((item) => {
               return (
                 <div className="ui card">
                   <div className="image">

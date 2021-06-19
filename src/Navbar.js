@@ -44,7 +44,7 @@ function exampleReducer(state, action) {
       throw new Error();
   }
 }
-const Navbar = () => {
+const Navbar = ({searchTerm,handleChange}) => {
   const [verticalClick, setVerticalClick] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
@@ -144,7 +144,10 @@ const Navbar = () => {
         </Link>
       </Image>
       <InputDiv>
-        <Input type="text" placeholder="Search..." id="header_input" action>
+        <Input type="text" placeholder="Search..." id="header_input" 
+          value={searchTerm}
+          onChange={handleChange}
+        action>
           <input />
           <Button type="submit">Search</Button>
         </Input>

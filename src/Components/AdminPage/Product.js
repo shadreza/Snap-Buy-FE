@@ -115,100 +115,102 @@ const ManageProducts = () => {
   const { register, handleSubmit, watch, formState } = useForm();
 
   return (
-     <Admin_Sidebar/>
-    <div>
-      <div className="employee">
-        <h2>Add Another Product</h2>
-        <div className="ui equal width form" id="employee_form">
-          <div
-            className={error === 1 || error === 100 ? "field error" : "field"}
-          >
-            <label>Product Name*</label>
-            <input
-              placeholder="Product Name"
-              type="text"
-              className="first_name"
-              id="name"
-              style={{ height: "20px" }}
-              {...register("name", { required: true })}
-            />
-          </div>
-          <div
-            className={error === 2 || error === 100 ? "field error" : "field"}
-          >
-            <label>Product Quantity*</label>
-            <input
-              placeholder="Product Quantity"
-              type="text"
-              className="qty"
-              id="qty"
-              style={{ height: "20px" }}
-              {...register("qty", { required: true })}
-            />
-          </div>
-          <div
-            className={error === 3 || error === 100 ? "field error" : "field"}
-          >
-            <label>Product Price*</label>
-            <input
-              placeholder="Price"
-              type="text"
-              className="price"
-              id="price"
-              style={{ height: "20px" }}
-              {...register("price", { required: true })}
-            />
-          </div>
-          <div
-            className={error === 4 || error === 100 ? "field error" : "field"}
-          >
-            <label>Product Category*</label>
-            <input
-              placeholder="Product Category"
-              type="text"
-              className="category"
-              id="category"
-              style={{ height: "20px" }}
-              {...register("category", { required: true })}
-            />
-          </div>
-          <div
-            className={error === 5 || error === 100 ? "field error" : "field"}
-          >
-            <label>Supplier ID*</label>
-            <input
-              placeholder="Supplier ID"
-              type="text"
-              className="supplierId"
-              id="supplierId"
-              style={{ height: "20px" }}
-              {...register("supplierId", { required: true })}
-            />
-          </div>
-          <div
-            className={error === 6 || error === 100 ? "field error" : "field"}
-          >
-            <label>Product Image*</label>
-            <input
-              placeholder="Product Image"
-              type="file"
-              className="inputBox"
-              id="inputImage"
-              style={{ height: "20px" }}
-              {...register("image", { required: true })}
-            />
-          </div>
+    <>
+      <Admin_Sidebar />
+      <div>
+        <div className="employee">
+          <h2>Add Another Product</h2>
+          <div className="ui equal width form" id="employee_form">
+            <div
+              className={error === 1 || error === 100 ? "field error" : "field"}
+            >
+              <label>Product Name*</label>
+              <input
+                placeholder="Product Name"
+                type="text"
+                className="first_name"
+                id="name"
+                style={{ height: "20px" }}
+                {...register("name", { required: true })}
+              />
+            </div>
+            <div
+              className={error === 2 || error === 100 ? "field error" : "field"}
+            >
+              <label>Product Quantity*</label>
+              <input
+                placeholder="Product Quantity"
+                type="text"
+                className="qty"
+                id="qty"
+                style={{ height: "20px" }}
+                {...register("qty", { required: true })}
+              />
+            </div>
+            <div
+              className={error === 3 || error === 100 ? "field error" : "field"}
+            >
+              <label>Product Price*</label>
+              <input
+                placeholder="Price"
+                type="text"
+                className="price"
+                id="price"
+                style={{ height: "20px" }}
+                {...register("price", { required: true })}
+              />
+            </div>
+            <div
+              className={error === 4 || error === 100 ? "field error" : "field"}
+            >
+              <label>Product Category*</label>
+              <input
+                placeholder="Product Category"
+                type="text"
+                className="category"
+                id="category"
+                style={{ height: "20px" }}
+                {...register("category", { required: true })}
+              />
+            </div>
+            <div
+              className={error === 5 || error === 100 ? "field error" : "field"}
+            >
+              <label>Supplier ID*</label>
+              <input
+                placeholder="Supplier ID"
+                type="text"
+                className="supplierId"
+                id="supplierId"
+                style={{ height: "20px" }}
+                {...register("supplierId", { required: true })}
+              />
+            </div>
+            <div
+              className={error === 6 || error === 100 ? "field error" : "field"}
+            >
+              <label>Product Image*</label>
+              <input
+                placeholder="Product Image"
+                type="file"
+                className="inputBox"
+                id="inputImage"
+                style={{ height: "20px" }}
+                {...register("image", { required: true })}
+              />
+            </div>
 
-          <button
-            className="positive ui button"
-            onClick={handleSubmit(onSubmit)}
-          >
-            Submit
-          </button>
+            <button
+              className="positive ui button"
+              onClick={handleSubmit(onSubmit)}
+            >
+              Submit
+            </button>
+          </div>
         </div>
+        <ToastContainer autoClose={1500} />
       </div>
-      <ToastContainer autoClose={1500} />
-    </div>
+    </>
   );
 };
 

@@ -17,6 +17,7 @@ import Signup from "./Authentication/Signup";
 import Navbar from "./Navbar";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
+import Order_Details from "./User/Order_Details";
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
@@ -64,6 +65,7 @@ function App() {
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/Profile" component={Profile} />
+          <Route path="/order_details" component={Order_Details} /> 
 
           <Route
             path="/get_cust_name_from_order_id"
