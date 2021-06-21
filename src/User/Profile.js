@@ -93,7 +93,6 @@ const Profile = () => {
         setPreviousmail(user);
       }
     });
-
     if (name?.length === 0) {
       setName(userDetails[0].CUST_NAME);
     }
@@ -164,9 +163,8 @@ const Profile = () => {
               position: "top-center",
             });
           } else {
-            axios.put("http://localhost:3001/api/update/customer", {
+            axios.post("http://localhost:3001/api/update/customer", {
               name: name,
-              mail: mail,
               gender: gender,
               phone: phone,
               house: house,
@@ -184,9 +182,9 @@ const Profile = () => {
         toast.error("Please give valid Mail ID", { position: "top-center" });
       }
     } else {
-      axios.put("http://localhost:3001/api/update/customer", {
+      setGender(document.getElementById("cust_gender").value);
+      axios.post("http://localhost:3001/api/update/customer", {
         name: name,
-        mail: mail,
         gender: gender,
         phone: phone,
         house: house,
@@ -232,19 +230,37 @@ const Profile = () => {
                   </div>
                   <div className="field">
                     <label>Gender*</label>
-                    <input
+                    <select
+                      className="ui fluid search dropdown"
+                      name="gender"
+                      id="cust_gender"
+                    >
+                      {item.CUST_GENDER === "male" ? (
+                        <>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                        </>
+                      )}
+                    </select>
+                    {/* <input
                       type="text"
                       id="customer_gender"
                       style={{ textTransform: "capitalize" }}
                       value={gender === null ? item.CUST_GENDER : gender}
                       onChange={(e) => setGender(e.target.value)}
-                    />
+                    /> */}
                   </div>
                   <div className="field">
                     <label>Mail*</label>
                     <input
                       type="text"
                       id="customer_mail"
+                      readonly=""
                       value={mail === null ? item.CUST_MAIL : mail}
                       onChange={(e) => setMail(e.target.value)}
                     />

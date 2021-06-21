@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { TiThMenu } from "react-icons/ti";
 import { HiDotsVertical } from "react-icons/hi";
+import { FiStar } from "react-icons/fi";
 import { FaFish, FaCarrot, FaUserCircle, FaUserPlus } from "react-icons/fa";
 import { BiDrink, BiLogInCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -33,6 +34,7 @@ import { Input, Button, Modal, Dropdown } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
+import { basket } from "./App";
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -45,6 +47,7 @@ function exampleReducer(state, action) {
   }
 }
 const Navbar = ({ searchTerm, handleChange }) => {
+  const basketContext = useContext(basket);
   // const [verticalClick, setVerticalClick] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
@@ -105,6 +108,13 @@ const Navbar = ({ searchTerm, handleChange }) => {
           <li>
             <MdLocalMall style={{ marginRight: "5px" }} />
             <p>All Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/popular_products">
+          <li>
+            <FiStar style={{ marginRight: "5px" }} />
+            <p>Popular Products</p>
             <IoIosArrowForward style={{ marginLeft: "auto" }} />
           </li>
         </Link>
@@ -180,6 +190,9 @@ const Navbar = ({ searchTerm, handleChange }) => {
         <Link to="/checkout" style={{ textDecoration: "none", color: "white" }}>
           <div className="user_profile">
             <IoMdBasket />
+            <small style={{ marginLeft: "10px" }}>
+              {basketContext[0]?.length}
+            </small>
           </div>
         </Link>
         <Dropdown_Menu show={showDropdown}>
@@ -305,7 +318,14 @@ const Navbar = ({ searchTerm, handleChange }) => {
                     marginRight: "10px",
                   }}
                 />
-                <p>Checkout</p>
+                <p>
+                  Checkout{" "}
+                  <span>
+                    <small style={{ marginLeft: "10px" }}>
+                      {basketContext[0]?.length}
+                    </small>
+                  </span>
+                </p>
               </li>
             </Link>
             <Link
@@ -377,7 +397,7 @@ const InputDiv = styled.div`
   display: flex;
   flex: 0.6;
   justify-content: center;
-  z-index:100;
+  z-index: 100;
 `;
 
 const Image = styled.div`

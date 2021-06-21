@@ -1,42 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { basket } from "../App";
 import "./Product.css";
 import { useStateValue } from "../StateProvider";
 
-
-function Product(product) {
+function Product({product}) {
   const [click, setClick] = useState(false);
   const [count, setCount] = useState(0);
   const [{ cart }, dispatch] = useStateValue();
-  const addToCart = () => {
-    // dispatch({
-    //   type: "ADD_TO_CART",
-    //   item: {
-    //     id: product.id,
-    //     product_name: product.product_name,
-    //     image: product.image,
-    //     unit: product.unit,
-    //     price: product.price,
-    //   },
-    // });
+  const basketContext = useContext(basket);
+  const addToCart = (prd) => {
+    basketContext[1]((cart) => [...basketContext[0], prd]);
   };
 
   return (
-    <div className="products">
+    <div className="products" style={{ textTransform: "capitalize" }}>
       <div className="product ">
         <div className="image" style={{}}>
-          <img src={product.image} alt="" style={{ objectFit: "contain" }} />
+          <img
+            src={product.PRODUCT_IMAGE}
+            alt=""
+            style={{ objectFit: "contain" }}
+          />
         </div>
 
         <div className="product__info" style={{ cursor: "pointer" }}>
-          <h4 className="productname">{product.product_name}</h4>
-          <p className="unit">{product.unit}</p>
+          <h4 className="productname">{product.PRODUCT_NAME}</h4>
+          <p className="unit">{product.PRODUCT_UNIT}</p>
           <p className="product__price">
             <small>Tk </small>
-            <strong>{product.price}</strong>
+            <strong>{product.PRODUCT_PRICE}</strong>
           </p>
         </div>
-        <button onClick={addToCart}>
+        <button
+          onClick={() => {
+            addToCart(product);
+          }}
+        >
           <p> Add to Cart</p>
         </button>
 

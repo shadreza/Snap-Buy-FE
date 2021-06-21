@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
+import { basket } from "../App";
 import { auth } from "../Authentication/firebase";
 import { useStateValue } from "../StateProvider";
 import Navbar from "../Navbar";
@@ -10,6 +11,7 @@ import Carousel_3slider from "./Carousel_3slider";
 
 const Home = () => {
   const [count, setCount] = useState(0);
+  const basketContext = useContext(basket);
   const [allProduct, setAllProduct] = useState([]);
   const [searchProduct, setSearchProduct] = useState([]);
   const [{ cart, user }, dispatch] = useStateValue();
@@ -25,6 +27,9 @@ const Home = () => {
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+  const addToCart = (prd) => {
+    basketContext[1]((cart) => [...basketContext[0], prd]);
   };
 
   useEffect(() => {
@@ -80,7 +85,10 @@ const Home = () => {
                     <div className="meta">
                       <span className="date">{item.PRODUCT_CATEGORY}</span>
                     </div>
-                    <div className="description"><small>Tk</small>{item.PRODUCT_PRICE}</div>
+                    <div className="description">
+                      <small>Tk</small>
+                      {item.PRODUCT_PRICE}
+                    </div>
                   </div>
                   <button className="positive ui button">Add to cart</button>
                 </div>

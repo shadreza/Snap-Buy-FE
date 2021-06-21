@@ -4,15 +4,16 @@ import ScrollToTop from "react-scroll-to-top";
 import Navbar from "../Navbar";
 import Product from "./Product";
 
-const All_Products = () => {
+const Popular_Products = () => {
   const [allProduct, setAllProduct] = useState([]);
-  const [searchProduct, setSearchProduct] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/get/product").then((response) => {
-      setAllProduct(response.data);
-      console.log(allProduct);
-    });
+    axios
+      .get("http://localhost:3001/api/get/popular_products")
+      .then((response) => {
+        setAllProduct(response.data);
+        console.log(allProduct);
+      });
   }, []);
   const [searchTerm, setSearchTerm] = React.useState(null);
   const [searchResults, setSearchResults] = React.useState([]);
@@ -30,7 +31,7 @@ const All_Products = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  const search_query = searchResults.map((item) => {
+  const displayAllProducts = allProduct.map((item) => {
     return (
       <Product
         key={item.PRODUCT_ID}
@@ -39,14 +40,6 @@ const All_Products = () => {
         unit={item.PRODUCT_QUANTITY}
         image={item.PRODUCT_IMAGE}
         price={item.PRODUCT_PRICE}
-      />
-    );
-  });
-
-  const displayAllProducts = allProduct.map((item) => {
-    return (
-      <Product
-        product={item}
       />
     );
   });
@@ -60,7 +53,7 @@ const All_Products = () => {
           borderRadius: "50%",
           padding: "5px",
           color: "black",
-          border: "3px solid #4caf50",
+          border: "2px solid #4caf50",
         }}
       />
       <Navbar searchTerm={searchTerm} handleChange={handleChange} />
@@ -86,7 +79,7 @@ const All_Products = () => {
                   key={item.PRODUCT_ID}
                   id={item.PRODUCT_ID}
                   product_name={item.PRODUCT_NAME}
-                  unit={item.PRODUCT_UNIT}
+                  unit={item.PRODUCT_QUANTITY}
                   image={item.PRODUCT_IMAGE}
                   price={item.PRODUCT_PRICE}
                 />
@@ -99,4 +92,4 @@ const All_Products = () => {
   );
 };
 
-export default All_Products;
+export default Popular_Products;
