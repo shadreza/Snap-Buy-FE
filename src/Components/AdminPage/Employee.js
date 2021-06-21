@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Admin_Sidebar from "./Admin_Sidebar";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "semantic-ui-css/semantic.min.css";
 import "./Employee.css";
 
@@ -134,7 +134,7 @@ const Employee = () => {
           }
         }
       }
-      // mail id exists of not check it
+      // mail id exists or not check it
       if (c1 > 3 && c2 > 3 && c3 > 2) {
         let found = 0;
         getEmployeeList.map((item) => {

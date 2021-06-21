@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { TiThMenu } from "react-icons/ti";
 import { HiDotsVertical } from "react-icons/hi";
+import { FiStar } from "react-icons/fi";
 import { FaFish, FaCarrot, FaUserCircle, FaUserPlus } from "react-icons/fa";
 import { BiDrink, BiLogInCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -46,10 +47,10 @@ function exampleReducer(state, action) {
   }
 }
 
-const Navbar = () => {
-
+const Navbar = ({ searchTerm, handleChange }) => {
   const basketContext = useContext(basket);
-  const [verticalClick, setVerticalClick] = useState(false);
+  // const [verticalClick, setVerticalClick] = useState(false);
+
   const [burgerMenu, setBurgerMenu] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   // Modal
@@ -59,9 +60,10 @@ const Navbar = () => {
   });
   const { open, dimmer } = state;
 
-  const handleVerticalClick = () => {
-    setVerticalClick(!verticalClick);
-  };
+
+  // const handleVerticalClick = () => {
+  //   setVerticalClick(!verticalClick);
+  // };
 
   const history = useHistory();
   const [{ cart, user }, dis] = useStateValue();
@@ -71,7 +73,8 @@ const Navbar = () => {
     if (type === "login") {
       if (user) {
         auth.signOut();
-        toast("Successfully Logged Out!!!", { position: "top-center" });
+        toast.success("Successfully Logged Out!!!", { position: "top-center" });
+        window.location.reload();
       } else {
         history.push("/signin");
       }
@@ -104,42 +107,62 @@ const Navbar = () => {
         }}
       />
       <BurgerMenu show={burgerMenu}>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Fruits</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Grocery</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Vegetables</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
+        <Link to="/all_products">
+          <li>
+            <MdLocalMall style={{ marginRight: "5px" }} />
+            <p>All Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/popular_products">
+          <li>
+            <FiStar style={{ marginRight: "5px" }} />
+            <p>Popular Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/fresh_products">
+          <li>
+            <FaCarrot style={{ marginRight: "5px" }} />
+            <p>Fresh Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/grocery">
+          <li>
+            <FaCarrot style={{ marginRight: "5px" }} />
+            <p>Grocery</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/bakery_and_snacks">
+          <li>
+            <GiConcreteBag style={{ marginRight: "5px" }} />
+            <p>Bakery and Snacks</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/dairy">
+          <li>
+            <GiMilkCarton style={{ marginRight: "5px" }} />
+            <p>Dairy</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/fish">
+          <li>
+            <FaFish style={{ marginRight: "5px" }} />
+            Fish
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/meat_and_chicken">
+          <li>
+            <GiChicken style={{ marginRight: "5px" }} />
+            Meat and Chicken
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
       </BurgerMenu>
       <Image>
         <Link to="/">
@@ -147,7 +170,14 @@ const Navbar = () => {
         </Link>
       </Image>
       <InputDiv>
-        <Input type="text" placeholder="Search..." id="header_input" action>
+        <Input
+          type="text"
+          placeholder="Search..."
+          id="header_input"
+          value={searchTerm}
+          onChange={handleChange}
+          action
+        >
           <input />
           <Button type="submit">Search</Button>
         </Input>
@@ -163,7 +193,11 @@ const Navbar = () => {
         <Link to="/checkout" style={{ textDecoration: "none", color: "white" }}>
           <div className="user_profile">
             <IoMdBasket />
-            <small style={{ marginLeft: "10px" }}>{basketContext[0].length}</small>
+
+            <small style={{ marginLeft: "10px" }}>
+              {basketContext[0]?.length}
+            </small>
+
           </div>
         </Link>
         <Dropdown_Menu show={showDropdown}>
@@ -201,20 +235,85 @@ const Navbar = () => {
             </Link>
           </div>
           <Modal.Content>
-            <Link
+            {/* <Link
               to="/signin"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("login")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <BiLogInCircle
+                style={{
+                  marginTop: "3px",
+                  marginRight: "10px",
+                  padding: "0px",
+                  marginLeft: "4px",
+                }}
+              />
+              <p>{user ? "Sign Out" : "LogIn"}</p>
+            </li>
+            {/* </Link> */}
+            {/* <Link
+              to="/profile"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("profile")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <CgProfile
+                style={{
+                  marginTop: "3px",
+                  marginRight: "10px",
+                  padding: "0px",
+                  marginLeft: "4px",
+                }}
+              />
+              <p>My Profile</p>
+            </li>
+            {/* </Link>
+            <Link
+              to="/order_details"
+              style={{ textDecoration: "none", color: "grey" }}
+            > */}
+            <li
+              onClick={() => handleAuthenticaton("order_details")}
+              style={{ textDecoration: "none", color: "grey" }}
+              className="modal"
+            >
+              <GiConcreteBag
+                style={{
+                  marginLeft: "4px",
+                  marginTop: "2px",
+                  marginRight: "10px",
+                }}
+              />
+              <p>My Order</p>
+            </li>
+            {/* </Link> */}
+            <Link
+              to="/checkout"
               style={{ textDecoration: "none", color: "grey" }}
             >
               <li>
-                <BiLogInCircle
+                <IoMdBasket
                   style={{
-                    marginTop: "3px",
-                    marginRight: "10px",
-                    padding: "0px",
                     marginLeft: "4px",
+                    marginTop: "2px",
+                    marginRight: "10px",
                   }}
                 />
-                <p>Log In</p>
+                <p>
+                  Checkout{" "}
+                  <span>
+                    <small style={{ marginLeft: "10px" }}>
+                      {basketContext[0]?.length}
+                    </small>
+                  </span>
+                </p>
               </li>
             </Link>
             <Link
@@ -231,21 +330,6 @@ const Navbar = () => {
                   }}
                 />
                 <p>SignUp</p>
-              </li>
-            </Link>
-            <Link
-              to="/checkout"
-              style={{ textDecoration: "none", color: "grey" }}
-            >
-              <li>
-                <IoMdBasket
-                  style={{
-                    marginLeft: "4px",
-                    marginTop: "2px",
-                    marginRight: "10px",
-                  }}
-                />
-                <p>Checkout</p>
               </li>
             </Link>
           </Modal.Content>
@@ -274,13 +358,14 @@ const Container = styled.div`
   background-color: green;
   border-radius: 0px 0px 12px 12px;
   border-bottom: 4px solid yellow;
-  z-index: 10;
+  z-index: 100;
 `;
 
 const InputDiv = styled.div`
   display: flex;
   flex: 0.6;
   justify-content: center;
+  z-index: 100;
 `;
 
 const Image = styled.div`
@@ -387,8 +472,8 @@ const Menu = styled.div`
 `;
 
 const Modal_header = styled(Modal)`
-  max-width: 400px;
-  min-width: 350px;
+  max-width: 350px;
+  min-width: 300px;
   position: fixed;
   top: 0;
   left: 100;
@@ -402,13 +487,13 @@ const Modal_header = styled(Modal)`
     padding: 20px;
   }
   .header_modal p {
-    font-size: 25px;
+    font-size: 20px;
     color: black;
   }
 
   li {
     list-style: none;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
     padding: 10px;
@@ -419,7 +504,7 @@ const Modal_header = styled(Modal)`
     &:hover {
       transform: scale(0.96);
       transition: all 0.2s ease-in-out;
-      color: #4caf50;
+      color: #4caf50 !important;
     }
   }
 `;

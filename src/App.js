@@ -17,7 +17,20 @@ import Signup from "./Authentication/Signup";
 import Navbar from "./Navbar";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
-import Checkout from "./Components/Checkout/Checkout";
+
+import Order_Details from "./User/Order_Details";
+import Payment_details from "./User/Payment_details";
+import Checkout from "./User/Checkout";
+import All_Products from "./Product/All_Products";
+import Fresh_Products from "./Product/Fresh_Products";
+import Grocery from "./Product/Grocery";
+import Dairy from "./Product/Dairy";
+import Fish from "./Product/Fish";
+import Meat_and_Chicken from "./Product/Meat_and_Chicken";
+import Bakery_and_Snacks from "./Product/Bakery_and_Snacks";
+import Popular_Products from "./Product/Popular_Products";
+
+
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
@@ -47,13 +60,6 @@ function App() {
   const [searchProduct, setSearchProduct] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
 
-  let userInfo = {
-    name       : null,
-    email      : null,
-    phone      : null,
-    image      : null,
-    isSignedIn : false
-  }
   const [currentBasket, setCurrentBasket] = useState([]);
   return (
     <Router>
@@ -62,8 +68,7 @@ function App() {
           <basket.Provider value={[currentBasket, setCurrentBasket]}>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/home" exact component={Home} />
-              <Route path="/checkout" component={Checkout} />
+
               <Route path="/sidebar" component={Admin_Sidebar} />
               <Route path="/info/customer" component={Customer} />
               <Route path="/overview/supplier" component={Supplier} />
@@ -76,7 +81,21 @@ function App() {
               <Route path="/signin" component={Signin} />
               <Route path="/signup" component={Signup} />
               <Route path="/Profile" component={Profile} />
-              <Route path="/get_cust_name_from_order_id" component={Get_Cust_Name_From_Order_Id} />
+              <Route path="/order_details" component={Order_Details} />
+              <Route path="/payment_details" component={Payment_details} />
+              <Route path="/checkout" component={Checkout} />
+              <Route path="/all_products" component={All_Products} />
+              <Route path="/fresh_products" component={Fresh_Products} />
+              <Route path="/grocery" component={Grocery} />
+              <Route path="/dairy" component={Dairy} />
+              <Route path="/fish" component={Fish} />
+              <Route path="/meat_and_chicken" component={Meat_and_Chicken} />
+              <Route path="/bakery_and_snacks" component={Bakery_and_Snacks} />
+              <Route path="/popular_products" component={Popular_Products} />
+              <Route
+                path="/get_cust_name_from_order_id"
+                component={Get_Cust_Name_From_Order_Id}
+              />
             </Switch>
           </basket.Provider>
         </loggedInUser.Provider>
