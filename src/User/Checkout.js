@@ -1,11 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { basket } from "../App";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Checkout = () => {
   const basketItems = useContext(basket);
   let totalPrice = 0;
   let basketArray = [];
+  const handleCheckout = () => {
+    let flag = 0;
+    basketArray.map((item) => {
+      allProduct.map((prd) => {
+        if (prd.PRODUCT_ID === item.id) {
+          if (item.qty > prd.PRODUCT_QUANTITY) {
+            alert.error(`${prd.PRODUCT_NAME.toUpperCase()} is short `);
+            flag = 1;
 
+            item.qty = prd.PRODUCT_QUANTITY;
+          }
+        }
+      });
+    });
+    return flag;
+  };
   const showingCheckouts = () => {
     basketItems[0].forEach((item) => {
       let name = item.PRODUCT_NAME;
@@ -52,18 +69,35 @@ const Checkout = () => {
   };
 
   const addOneMore = (prd) => {
-    let product = {
-      PRODUCT_ID: prd.id,
-      PRODUCT_NAME: prd.name,
-      PRODUCT_IMAGE: prd.image,
-      PRODUCT_PRICE: prd.price,
-      PRODUCT_CATEGORY: prd.category,
-    };
-    basketItems[1](() => [...basketItems[0], product]);
-    showingCheckouts();
+    let flag = 0;
+    basketArray.map((item) => {
+      allProduct.map((prd) => {
+        if (prd.PRODUCT_ID === item.id) {
+          if (item.qty > prd.PRODUCT_QUANTITY) {
+            alert(`${prd.PRODUCT_NAME.toUpperCase()} is short `);
+            flag = 1;
+            item.qty = prd.PRODUCT_QUANTITY;
+          }
+        }
+      });
+    });
+    if (flag === 0) {
+      let product = {
+        PRODUCT_ID: prd.id,
+        PRODUCT_NAME: prd.name,
+        PRODUCT_IMAGE: prd.image,
+        PRODUCT_PRICE: prd.price,
+        PRODUCT_CATEGORY: prd.category,
+      };
+
+      basketItems[1](() => [...basketItems[0], product]);
+      removeOne(prd.PRODUCT_ID);
+      showingCheckouts();
+    }
   };
 
   const removeOne = (theId) => {
+    handleCheckout();
     let newBasket = [];
     let label = 0;
 
@@ -96,6 +130,14 @@ const Checkout = () => {
   };
 
   showingCheckouts();
+  const [allProduct, setAllProduct] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/get/product").then((response) => {
+      setAllProduct(response.data);
+    });
+    console.log("Basket array ", basketArray);
+    console.log("basket item of 0 ", basketItems[0]);
+  }, [basketArray]);
 
   return (
     <div>
@@ -136,22 +178,23 @@ const Checkout = () => {
             ))}
           </div>
         </div>
-
+        {/* 
         <h4>Total Price : {totalPrice} BDT</h4>
 
         <div className="checkout-btn">
           <button>Checkout</button>
         </div>
-      </div>
-      <div>
+      </div> */}
+        {/* <div> */}
         <div class="ui left action input">
-          <button class="ui teal labeled icon button">
+          <button class="ui teal labeled icon button" onClick={handleCheckout}>
             <i class="cart icon"></i>
             Checkout
           </button>
-          <input type="text" readOnly="" value="$52.03" />
+          <input type="text" readOnly="" value={totalPrice + " tk"} />
         </div>
       </div>
+      <ToastContainer autoClose={1200} />
     </div>
   );
 };
