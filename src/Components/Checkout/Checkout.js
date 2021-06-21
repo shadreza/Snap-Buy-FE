@@ -104,10 +104,10 @@ const Checkout = () => {
     showingCheckouts();
 
     return (
-        <div>
-            <div className="checkout-page-main-div">
+        <div className="checkout-page-main-div">
+            <div className="another-div">
 
-                This is the checkout page
+                <h2>Your Basket</h2>
 
                 <div className="items">
                     {
@@ -129,6 +129,10 @@ const Checkout = () => {
             </div>
 
             <h4>Total Price : {totalPrice} BDT</h4>
+
+            <div className="checkout-btn">
+                <button>Checkout</button>
+            </div>
 
         </div>
     );

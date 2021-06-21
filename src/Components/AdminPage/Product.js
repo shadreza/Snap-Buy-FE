@@ -37,6 +37,8 @@ const ManageProducts = () => {
       supplierID: data.supplierId,
     };
 
+    console.log(prdInfo.image);
+
     if (
       prdInfo.name.length === 0 &&
       prdInfo.qty.length === 0 &&
