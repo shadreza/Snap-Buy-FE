@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { auth } from "./firebase";
 import "./Signin.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function Signup() {
   //   const [userInfo, setUserInfo] = useState({
@@ -29,25 +30,45 @@ function Signup() {
   const register = (e) => {
     e.preventDefault();
     console.log("Last id : ", id);
-    Axios.post("http://localhost:3001/api/insert", {
-      id: id,
-      name: name.trim(),
-      mail: mail.trim(),
-      gender: gender.toLowerCase().trim(),
-      phone: phone.trim(),
-      house: house.trim(),
-      street: street.trim(),
-      postal: postal.trim(),
-    });
+    if (
+      id.length === 0 ||
+      name.length === 0 ||
+      mail.length === 0 ||
+      gender.length === 0 ||
+      phone.length === 0 ||
+      house.length === 0 ||
+      street.length === 0 ||
+      postal.length === 0
+    ) {
+      toast.error("Fill up the form properly!!!", { position: "top-center" });
+    } else if (
+      gender.trim().toLowerCase() !== "male" ||
+      gender.trim().toLowerCase() !== "female"
+    ) {
+      toast.error("Gender can be either male or female ", {
+        position: "top-center",
+      });
+    } else {
+      Axios.post("http://localhost:3001/api/insert", {
+        id: id,
+        name: name.trim().toLowerCase(),
+        mail: mail.trim().toLowerCase(),
+        gender: gender.toLowerCase().trim(),
+        phone: phone.trim().toLowerCase(),
+        house: house.trim().toLowerCase(),
+        street: street.trim().toLowerCase(),
+        postal: postal.trim().toLowerCase(),
+      });
 
-    auth
-      .createUserWithEmailAndPassword(mail, password)
-      .then((auth) => {
-        if (auth) {
-          history.push("/signin");
-        }
-      })
-      .catch((error) => alert(error.message));
+      auth
+        .createUserWithEmailAndPassword(mail, password)
+        .then((auth) => {
+          if (auth) {
+            history.push("/signin");
+          }
+        })
+        .catch((error) => alert(error.message));
+    }
   };
 
   const setValue = (val, type) => {
@@ -140,6 +161,7 @@ function Signup() {
               onChange={(e) => setValue(e.target.value, "password")}
               required
             />
+            
             <button
               onClick={register}
               className="login__registerButton"
@@ -161,6 +183,7 @@ function Signup() {
           </label>
         </div>
       </div>
+      <ToastContainer autoClose={1200} />
     </div>
   );
 }

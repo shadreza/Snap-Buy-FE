@@ -18,6 +18,15 @@ import Navbar from "./Navbar";
 import { auth } from "./Authentication/firebase";
 import { useStateValue } from "./StateProvider";
 import Order_Details from "./User/Order_Details";
+import Payment_details from "./User/Payment_details";
+import Checkout from "./User/Checkout";
+import All_Products from "./Product/All_Products";
+import Fresh_Products from "./Product/Fresh_Products";
+import Grocery from "./Product/Grocery";
+import Dairy from "./Product/Dairy";
+import Fish from "./Product/Fish";
+import Meat_and_Chicken from "./Product/Meat_and_Chicken";
+import Bakery_and_Snacks from "./Product/Bakery_and_Snacks";
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
@@ -51,27 +60,35 @@ function App() {
         value={[searchProduct, setSearchProduct]}
       >
         <loggedInUser.Provider value={[loggedUser, setLoggedUser]}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/sidebar" component={Admin_Sidebar} />
-          <Route path="/info/customer" component={Customer} />
-          <Route path="/overview/supplier" component={Supplier} />
-          <Route path="/overview/employee" component={Employee} />
-          <Route path="/info/supplier" component={Supplier_Info} />
-          <Route path="/info/employee" component={Employee_Info} />
-          <Route path="/info/product" component={Product_Info} />
-          <Route path="/admin_login" component={Admin_login} />
-          <Route path="/product" component={Product} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/Profile" component={Profile} />
-          <Route path="/order_details" component={Order_Details} /> 
-
-          <Route
-            path="/get_cust_name_from_order_id"
-            component={Get_Cust_Name_From_Order_Id}
-          />
-        </Switch>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/sidebar" component={Admin_Sidebar} />
+            <Route path="/info/customer" component={Customer} />
+            <Route path="/overview/supplier" component={Supplier} />
+            <Route path="/overview/employee" component={Employee} />
+            <Route path="/info/supplier" component={Supplier_Info} />
+            <Route path="/info/employee" component={Employee_Info} />
+            <Route path="/info/product" component={Product_Info} />
+            <Route path="/admin_login" component={Admin_login} />
+            <Route path="/product" component={Product} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/Profile" component={Profile} />
+            <Route path="/order_details" component={Order_Details} />
+            <Route path="/payment_details" component={Payment_details} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/all_products" component={All_Products} />
+            <Route path="/fresh_products" component={Fresh_Products} />
+            <Route path="/grocery" component={Grocery} />
+            <Route path="/dairy" component={Dairy} />
+            <Route path="/fish" component={Fish} />
+            <Route path="/meat_and_chicken" component={Meat_and_Chicken} />
+            <Route path="/bakery_and_snacks" component={Bakery_and_Snacks} />
+            <Route
+              path="/get_cust_name_from_order_id"
+              component={Get_Cust_Name_From_Order_Id}
+            />
+          </Switch>
         </loggedInUser.Provider>
       </search_product_context.Provider>
     </Router>

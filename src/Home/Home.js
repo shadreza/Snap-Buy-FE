@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     const results = allProduct.filter((item) =>
-      item.PRODUCT_NAME.toLowerCase().includes(searchTerm.toLowerCase())
+      item.PRODUCT_NAME.includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm]);
@@ -38,31 +38,37 @@ const Home = () => {
   return (
     <>
       <Navbar searchTerm={searchTerm} handleChange={handleChange} />
-      <Carousel />
-      <Carousel_3slider />
+
       <div>
-        {searchTerm === null ?  (
-          <div className="home_div">
-            {allProduct.map((item) => {
-              return (
-                <div className="ui card">
-                  <div className="image">
-                    <img src={item.PRODUCT_IMAGE} />
-                  </div>
-                  <div className="content">
-                    <a className="">{item.PRODUCT_NAME}</a>
-                    <div className="meta">
-                      <span className="date">{item.PRODUCT_CATEGORY}</span>
+        {searchTerm === null || searchTerm?.length === 0 ? (
+          <>
+            <Carousel />
+            <div className="home_div">
+              <Carousel_3slider />
+              {allProduct.map((item) => {
+                return (
+                  <div className="ui card">
+                    <div className="image">
+                      <img src={item.PRODUCT_IMAGE} />
                     </div>
-                    <div className="description">{item.PRODUCT_PRICE}</div>
+                    <div className="content">
+                      <a className="">{item.PRODUCT_NAME}</a>
+                      <div className="meta">
+                        <span className="date">{item.PRODUCT_CATEGORY}</span>
+                      </div>
+                      <div className="description">
+                        <small>Tk</small>
+                        {item.PRODUCT_PRICE}
+                      </div>
+                    </div>
+                    <button className="positive ui button">Add to cart</button>
                   </div>
-                  <button className="positive ui button">Add to cart</button>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         ) : (
-          <div className="home_div">
+          <div className="home_div" style={{ marginTop: "80px" }}>
             {searchResults.map((item) => {
               return (
                 <div className="ui card">
@@ -74,7 +80,7 @@ const Home = () => {
                     <div className="meta">
                       <span className="date">{item.PRODUCT_CATEGORY}</span>
                     </div>
-                    <div className="description">{item.PRODUCT_PRICE}</div>
+                    <div className="description"><small>Tk</small>{item.PRODUCT_PRICE}</div>
                   </div>
                   <button className="positive ui button">Add to cart</button>
                 </div>

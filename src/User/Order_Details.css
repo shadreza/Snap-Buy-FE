@@ -1,0 +1,110 @@
+.checkout__product {
+  display: flex;
+  width: 800px;
+  min-width: 300px;
+  min-height: 180px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 0px 6px 0px grey;
+  color: white;
+}
+.checkout__product.grow {
+  transition: all 0.2s ease-in-out;
+}
+.checkout__product:hover {
+  transform: scale(1.01);
+  transition: all 0.2s ease-in;
+}
+.checkout__product {
+  display: inline-flex;
+  margin: 10px !important;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  z-index: 1;
+  box-shadow: 2px 0px 6px 1px grey;
+  border-radius: 8px;
+  color: black;
+  margin-bottom: 15px !important;
+}
+.checkout_items {
+  display: flex;
+  margin-right: auto;
+  margin-left: 0px !important;
+}
+.checkout__image {
+  width: 200px;
+  height: 160px;
+  object-fit: contain;
+  border: 1px solid #4caf50 !important;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.checkout__image img {
+  width: 180px;
+  height: 145px;
+  object-fit: contain;
+  align-items: center;
+  align-self: center;
+}
+
+.checkout__image img:hover {
+  transform: scale(1.52);
+  transition: all 0.6s ease-in;
+  overflow: hidden;
+}
+
+.checkout__product__info {
+  margin-left: 20px;
+  margin-top: 30px !important;
+}
+
+.checkout__product__info {
+  line-height: 25px;
+}
+.delete_item:hover {
+  color: red;
+  transform: all 0.4s ease-in-out;
+}
+
+@media only screen and (max-width: 1668px) {
+  .checkout__product {
+    width: 700px;
+    height: max-content;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .checkout__product {
+    width: 568px;
+    height: max-content;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .checkout__product {
+    width: 468px;
+    height: max-content;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .checkout__product {
+    display: block;
+    width: 400px;
+    height: max-content;
+  }
+  .checkout__items {
+    display: block !important;
+  }
+  .checkout__product img {
+    display: block;
+    margin-right: auto;
+  }
+  .checkout__product__info {
+    margin-left: 5px !important;
+    margin-right: 15px;
+  }
+  .delete_item {
+    margin-top: 10px;
+  }
+}

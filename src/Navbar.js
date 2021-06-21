@@ -44,8 +44,8 @@ function exampleReducer(state, action) {
       throw new Error();
   }
 }
-const Navbar = ({searchTerm,handleChange}) => {
-  const [verticalClick, setVerticalClick] = useState(false);
+const Navbar = ({ searchTerm, handleChange }) => {
+  // const [verticalClick, setVerticalClick] = useState(false);
   const [burgerMenu, setBurgerMenu] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -101,42 +101,55 @@ const Navbar = ({searchTerm,handleChange}) => {
         }}
       />
       <BurgerMenu show={burgerMenu}>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Fruits</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Grocery</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          <p>Vegetables</p>
-          <IoIosArrowForward style={{ marginLeft: "auto" }} />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
-        <li>
-          <FaCarrot style={{ marginRight: "5px" }} />
-          Vegetables
-          <IoIosArrowForward
-            style={{ marginLeft: "140px", marginTop: "2px" }}
-          />
-        </li>
+        <Link to="/all_products">
+          <li>
+            <MdLocalMall style={{ marginRight: "5px" }} />
+            <p>All Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/fresh_products">
+          <li>
+            <FaCarrot style={{ marginRight: "5px" }} />
+            <p>Fresh Products</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/grocery">
+          <li>
+            <FaCarrot style={{ marginRight: "5px" }} />
+            <p>Grocery</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/bakery_and_snacks">
+          <li>
+            <GiConcreteBag style={{ marginRight: "5px" }} />
+            <p>Bakery and Snacks</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/dairy">
+          <li>
+            <GiMilkCarton style={{ marginRight: "5px" }} />
+            <p>Dairy</p>
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/fish">
+          <li>
+            <FaFish style={{ marginRight: "5px" }} />
+            Fish
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
+        <Link to="/meat_and_chicken">
+          <li>
+            <GiChicken style={{ marginRight: "5px" }} />
+            Meat and Chicken
+            <IoIosArrowForward style={{ marginLeft: "auto" }} />
+          </li>
+        </Link>
       </BurgerMenu>
       <Image>
         <Link to="/">
@@ -144,10 +157,14 @@ const Navbar = ({searchTerm,handleChange}) => {
         </Link>
       </Image>
       <InputDiv>
-        <Input type="text" placeholder="Search..." id="header_input" 
+        <Input
+          type="text"
+          placeholder="Search..."
+          id="header_input"
           value={searchTerm}
           onChange={handleChange}
-        action>
+          action
+        >
           <input />
           <Button type="submit">Search</Button>
         </Input>
@@ -353,13 +370,14 @@ const Container = styled.div`
   background-color: green;
   border-radius: 0px 0px 12px 12px;
   border-bottom: 4px solid yellow;
-  z-index: 10;
+  z-index: 100;
 `;
 
 const InputDiv = styled.div`
   display: flex;
   flex: 0.6;
   justify-content: center;
+  z-index:100;
 `;
 
 const Image = styled.div`
