@@ -108,7 +108,7 @@ const Product_Info = () => {
             );
           })}
         </div>
-        <ToastContainer autoClose={1500}/>
+        <ToastContainer autoClose={1500} />
       </div>
     </div>
   );
