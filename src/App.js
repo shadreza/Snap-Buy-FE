@@ -29,6 +29,7 @@ import Fish from "./Product/Fish";
 import Meat_and_Chicken from "./Product/Meat_and_Chicken";
 import Bakery_and_Snacks from "./Product/Bakery_and_Snacks";
 import Popular_Products from "./Product/Popular_Products";
+import AdminAddsPrd from "./Product/AdminAddsPrd";
 
 
 
@@ -68,7 +69,7 @@ function App() {
           <basket.Provider value={[currentBasket, setCurrentBasket]}>
             <Switch>
               <Route path="/" exact component={Home} />
-
+              <Route path="/addsPrd" component={AdminAddsPrd} />
               <Route path="/sidebar" component={Admin_Sidebar} />
               <Route path="/info/customer" component={Customer} />
               <Route path="/overview/supplier" component={Supplier} />

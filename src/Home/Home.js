@@ -13,8 +13,6 @@ import Carousel_3slider from "./Carousel_3slider";
 const Home = () => {
 
   const search_value = useContext(search_product_context);
-  const userLoggedIn = useContext(loggedInUser);
-  const basketContext = useContext(basket);
   const [count, setCount] = useState(0);
   const basketContext = useContext(basket);
   const [allProduct, setAllProduct] = useState([]);
@@ -39,14 +37,11 @@ const Home = () => {
 
   useEffect(() => {
     const results = allProduct.filter((item) =>
-      item.PRODUCT_NAME.includes(searchTerm.toLowerCase())
+      item.PRODUCT_NAME.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm]);
 
-  const addToCart = (prd) => {
-    basketContext[1](cart => [...basketContext[0], prd]);
-  }
 
   return (
     <div>
