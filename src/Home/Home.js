@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { search_product_context } from "../App";
 import { basket } from "../App";
+import Product from "../Product/Product";
 import { auth } from "../Authentication/firebase";
 import { useStateValue } from "../StateProvider";
 import Navbar from "../Navbar";
@@ -50,49 +51,75 @@ const Home = () => {
             <Carousel />
             <div className="home_div">
               <Carousel_3slider />
-              {allProduct.map((item) => {
-                return (
-                  <div className="ui card">
-                    <div className="image">
-                      <img src={item.PRODUCT_IMAGE} />
-                    </div>
-                    <div className="content">
-                      <a className="">{item.PRODUCT_NAME}</a>
-                      <div className="meta">
-                        <span className="date">{item.PRODUCT_CATEGORY}</span>
-                      </div>
-                      <div className="description">
-                        <small>Tk</small>
-                        {item.PRODUCT_PRICE}
-                      </div>
-                    </div>
-                    <button className="positive ui button">Add to cart</button>
+              <section id="services-container">
+                <h1 class="h-primary center">Our Services</h1>
+                <div id="services">
+                  <div class="box">
+                    <img
+                      src="logo_banner\del.png"
+                      height="150px"
+                      width="150px"
+                    ></img>
+                    <h2 class="h-secondary center">Fastest Delivery</h2>
+                    <p class="center">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Quidem, culpa suscipit error Lorem ipsum dolor sit, amet
+                      consectetur adipisicing elit. Et qui, repudiandae
+                      similique nam, recusandae quidem ab asperiores ex, aut
+                      fugit labore veritatis facere? sint delectus ab dolorum
+                      nam. Debitis facere, incidunt voluptates eos, mollitia
+                      voluptatem iste sunt voluptas beatae facilis labore, omnis
+                      sint quae eum.
+                    </p>
                   </div>
-                );
-              })}
+
+                  <div class="box">
+                    <img
+                      src="logo_banner\trust2.png"
+                      height="150px"
+                      width="150px"
+                    ></img>
+                    <h2 class="h-secondary center">Trustworthy Suppliers</h2>
+                    <p class="center">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Quidem, culpa suscipit error Lorem ipsum dolor sit, amet
+                      consectetur adipisicing elit. Et qui, repudiandae
+                      similique nam, recusandae quidem ab asperiores ex, aut
+                      fugit labore veritatis facere? sint delectus ab dolorum
+                      nam. Debitis facere, incidunt voluptates eos, mollitia
+                      voluptatem iste sunt voluptas beatae facilis labore, omnis
+                      sint quae eum.
+                    </p>
+                  </div>
+
+                  <div class="box">
+                    <img
+                      src="logo_banner\img1.png"
+                      height="150px"
+                      width="150px"
+                    ></img>
+                    <h2 class="h-secondary center">
+                      Only fresh and healthy foods
+                    </h2>
+                    <p class="center">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Quidem, culpa suscipit error Lorem ipsum dolor sit, amet
+                      consectetur adipisicing elit. Et qui, repudiandae
+                      similique nam, recusandae quidem ab asperiores ex, aut
+                      fugit labore veritatis facere? sint delectus ab dolorum
+                      nam. Debitis facere, incidunt voluptates eos, mollitia
+                      voluptatem iste sunt voluptas beatae facilis labore, omnis
+                      sint quae eum.
+                    </p>
+                  </div>
+                </div>
+              </section>
             </div>
           </>
         ) : (
           <div className="home_div" style={{ marginTop: "80px" }}>
             {searchResults.map((item) => {
-              return (
-                <div className="ui card">
-                  <div className="image">
-                    <img src={item.PRODUCT_IMAGE} />
-                  </div>
-                  <div className="content">
-                    <a className="">{item.PRODUCT_NAME}</a>
-                    <div className="meta">
-                      <span className="date">{item.PRODUCT_CATEGORY}</span>
-                    </div>
-                    <div className="description">
-                      <small>Tk</small>
-                      {item.PRODUCT_PRICE}
-                    </div>
-                  </div>
-                  <button className="positive ui button">Add to cart</button>
-                </div>
-              );
+              return <Product product={item} />;
             })}
           </div>
         )}

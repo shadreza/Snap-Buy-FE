@@ -1,27 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
-import { basket } from "../App";
+import { basket, presentBasket } from "../App";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import Payment_details from "./Payment_details";
 
 const Checkout = () => {
   const basketItems = useContext(basket);
   let totalPrice = 0;
   let basketArray = [];
+  const history = useHistory();
+  const BASKET = useContext(presentBasket);
   const handleCheckout = () => {
     let flag = 0;
     basketArray.map((item) => {
       allProduct.map((prd) => {
         if (prd.PRODUCT_ID === item.id) {
           if (item.qty > prd.PRODUCT_QUANTITY) {
-            alert.error(`${prd.PRODUCT_NAME.toUpperCase()} is short `);
-            flag = 1;
-
             item.qty = prd.PRODUCT_QUANTITY;
           }
         }
       });
     });
-    return flag;
+    BASKET[1](basketArray);
+
+    history.push("/payment");
   };
   const showingCheckouts = () => {
     basketItems[0].forEach((item) => {

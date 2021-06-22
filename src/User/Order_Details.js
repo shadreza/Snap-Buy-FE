@@ -81,13 +81,16 @@ const Order_Details = () => {
                     display: "flex",
                   }}
                 >
-                  <h2>Order Id: </h2>
-                  <h2>{item.ORDER_ID}</h2>
+                  <h2>
+                    <span>Order Id : {item.ORDER_ID}</span>
+                  </h2>
                 </div>
                 <div>
-                  <h4> {item.ORDER_QUANTITY}</h4>
+                  <h4 style={{ display: "flex" }}>
+                    <span>Quantity : {item.ORDER_QUANTITY}</span>
+                  </h4>
                   <p>{item.ORDER_TIME}</p>
-                  <h4>
+                  <h4 style={{ display: "flex" }}>
                     <small>Tk</small>
                     {item.ORDER_TOTAL_COST}
                   </h4>

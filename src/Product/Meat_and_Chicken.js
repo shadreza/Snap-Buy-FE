@@ -34,16 +34,7 @@ const Meat_and_Chicken = () => {
       item.PRODUCT_CATEGORY === "meat_and_chicken" ||
       item.PRODUCT_CATEGORY === "meat"
     ) {
-      return (
-        <Product
-          key={item.PRODUCT_ID}
-          id={item.PRODUCT_ID}
-          product_name={item.PRODUCT_NAME}
-          unit={item.PRODUCT_QUANTITY}
-          image={item.PRODUCT_IMAGE}
-          price={item.PRODUCT_PRICE}
-        />
-      );
+      return <Product product={item} />;
     }
   });
 
@@ -77,16 +68,7 @@ const Meat_and_Chicken = () => {
         ) : (
           <>
             {searchResults.map((item) => {
-              return (
-                <Product
-                  key={item.PRODUCT_ID}
-                  id={item.PRODUCT_ID}
-                  product_name={item.PRODUCT_NAME}
-                  unit={item.PRODUCT_QUANTITY}
-                  image={item.PRODUCT_IMAGE}
-                  price={item.PRODUCT_PRICE}
-                />
-              );
+              return <Product product={item} />;
             })}
           </>
         )}

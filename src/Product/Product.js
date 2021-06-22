@@ -28,15 +28,15 @@ function Product({ product }) {
     });
 
     allProduct.map((item) => {
-      if (item.PRODUCT_ID < count_prd) {
+      if (item.PRODUCT_ID <= count_prd) {
         flag = 1;
       }
     });
-    if (flag === 0) {
+   // if (flag === 0) {
       basketContext[1]((cart) => [...basketContext[0], prd]);
-    } else {
-      alert(`${prd.PRODUCT_NAME.toUpperCase()} is short`);
-    }
+    //} else {
+     // alert(`${prd.PRODUCT_NAME.toUpperCase()} is short`);
+    //}
   };
 
   return (
