@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import { search_product_context } from "../App";
 import { basket } from "../App";
 import Product from "../Product/Product";
@@ -11,6 +12,10 @@ import Carousel from "./Carousel";
 import Carousel_3slider from "./Carousel_3slider";
 
 const Home = () => {
+
+  const search_value = useContext(search_product_context);
+  const userLoggedIn = useContext(loggedInUser);
+  const basketContext = useContext(basket);
   const [count, setCount] = useState(0);
   const basketContext = useContext(basket);
   const [allProduct, setAllProduct] = useState([]);
@@ -40,9 +45,13 @@ const Home = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  const search_value = useContext(search_product_context);
+  const addToCart = (prd) => {
+    basketContext[1](cart => [...basketContext[0], prd]);
+  }
+
   return (
-    <>
+    <div>
+
       <Navbar searchTerm={searchTerm} handleChange={handleChange} />
 
       <div>
@@ -51,6 +60,7 @@ const Home = () => {
             <Carousel />
             <div className="home_div">
               <Carousel_3slider />
+<<<<<<< HEAD
               <section id="services-container">
                 <h1 class="h-primary center">Our Services</h1>
                 <div id="services">
@@ -71,6 +81,26 @@ const Home = () => {
                       voluptatem iste sunt voluptas beatae facilis labore, omnis
                       sint quae eum.
                     </p>
+=======
+              {allProduct.map((item) => {
+                return (
+                  <div className="ui card">
+                    <div className="image">
+                      <img src={item.PRODUCT_IMAGE} />
+
+                    </div>
+                    <div className="content">
+                      <a className="">{item.PRODUCT_NAME}</a>
+                      <div className="meta">
+                        <span className="date">{item.PRODUCT_CATEGORY}</span>
+                      </div>
+                      <div className="description">
+                        <small>Tk</small>
+                        {item.PRODUCT_PRICE}
+                      </div>
+                    </div>
+                    <button className="positive ui button">Add to cart</button>
+>>>>>>> 206625a795d0d25ec3d85dd8ea21d62692c13fda
                   </div>
 
                   <div class="box">
@@ -116,15 +146,37 @@ const Home = () => {
               </section>
             </div>
           </>
+
         ) : (
           <div className="home_div" style={{ marginTop: "80px" }}>
             {searchResults.map((item) => {
+<<<<<<< HEAD
               return <Product product={item} />;
+=======
+              return (
+                <div className="ui card">
+                  <div className="image">
+                    <img src={item.PRODUCT_IMAGE} />
+                  </div>
+                  <div className="content">
+                    <a className="">{item.PRODUCT_NAME}</a>
+                    <div className="meta">
+                      <span className="date">{item.PRODUCT_CATEGORY}</span>
+                    </div>
+                    <div className="description">
+                      <small>Tk</small>
+                      {item.PRODUCT_PRICE}
+                    </div>
+                  </div>
+                  <button className="positive ui button" onClick={()=>{addToCart(item)}}>Add to cart</button>
+                </div>
+              );
+>>>>>>> 206625a795d0d25ec3d85dd8ea21d62692c13fda
             })}
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

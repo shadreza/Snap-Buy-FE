@@ -20,10 +20,11 @@ function Signin() {
       .then((auth) => {
         console.log(auth.user.email);
         const USER =  {
-          name  : auth.user.displayName,
-          email : auth.user.email,
-          phone : auth.user.phoneNumber,
-          image : auth.user.photoURL
+          name       : auth.user.displayName,
+          email      : auth.user.email,
+          phone      : auth.user.phoneNumber,
+          image      : auth.user.photoURL,
+          isSignedIn : true
         }
         userInfo[1](USER)
         history.push("/");
