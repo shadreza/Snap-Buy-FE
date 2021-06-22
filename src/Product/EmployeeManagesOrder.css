@@ -1,0 +1,13 @@
+.emp-adding-orders {
+    display:  margin;
+    grid-gap: 2rem;
+    padding: 1rem;
+}
+
+.orders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+}
+
