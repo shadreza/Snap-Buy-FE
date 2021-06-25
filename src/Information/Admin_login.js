@@ -16,6 +16,7 @@ const Admin_login = () => {
   const history = useHistory();
 
   const handleSubmit = () => {
+    let flag = 0;
     let name = document
       .getElementById("admin_username")
       .value.trim()
@@ -26,17 +27,29 @@ const Admin_login = () => {
         item.ADMIN_NAME.toLowerCase() === name &&
         item.ADMIN_PASSWORD === pass
       ) {
-        history.push("/info/product");
-      } else {
-        alert("USERNAME AND PASSWORD DIDN'T MATCH", { position: "top-center" });
+        flag = 1;
       }
     });
+    if (flag === 0) {
+      toast.error("USERNAME Or PASSWORD DIDN'T MATCH", {
+        position: "top-center",
+      });
+    } else {
+      history.push("/info");
+    }
   };
   return (
     <>
-      <div style={{ verticalAlign: "center" }}>
-        <div className="ui placeholder segment">
-          <div className="ui two column very relaxed stackable grid">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+        }}
+      >
+        <div style={{ verticalAlign: "center" }}>
+          <div className="ui placeholder segment">
             <div className="column">
               <div className="ui form">
                 <div className="field">
@@ -62,8 +75,8 @@ const Admin_login = () => {
                 </div>
               </div>
             </div>
+            <ToastContainer autoClose={1200} />
           </div>
-          <ToastContainer autoClose={1200} />
         </div>
       </div>
     </>
