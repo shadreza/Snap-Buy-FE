@@ -14,3 +14,40 @@
   justify-content: space-evenly;
   max-height:200px!important;
 }
+.Noshtami {
+  padding: 60px;
+  text-align: center;
+  color: #1abc9c;
+  font-size: 30px;
+}
+
+/*Service part*/
+#services{
+  margin: 34px;
+  display: flex;
+}
+#services .box{ 
+  border: 2px solid brown;
+  padding: 34px;
+  margin: 2px 55px;
+  border-radius: 28px;
+  background: #f2f2f2;
+  margin-bottom: 20px;
+}
+
+
+#services .box img{ 
+ height: 160px;
+ margin: auto;
+ display: block;
+}
+
+
+.h-primary{
+
+  font-size: 3.8rem;
+  padding: 12px;
+}
+.center{
+  text-align: center;
+}

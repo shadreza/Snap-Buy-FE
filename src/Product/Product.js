@@ -1,16 +1,42 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { basket } from "../App";
+import { ToastContainer, toast } from "react-toastify";
 import "./Product.css";
 import { useStateValue } from "../StateProvider";
 
-function Product({product}) {
+function Product({ product }) {
   const [click, setClick] = useState(false);
   const [count, setCount] = useState(0);
   const [{ cart }, dispatch] = useStateValue();
   const basketContext = useContext(basket);
+  const [allProduct, setAllProduct] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/get/product").then((response) => {
+      setAllProduct(response.data);
+    });
+  }, []);
   const addToCart = (prd) => {
-    basketContext[1]((cart) => [...basketContext[0], prd]);
+    toast.dismiss();
+    let count_prd = 0;
+    let flag = 0;
+    basketContext[0].map((item) => {
+      if (item.PRODUCT_ID === prd.PRODUCT_ID) {
+        count_prd++;
+      }
+    });
+
+    allProduct.map((item) => {
+      if (item.PRODUCT_ID <= count_prd) {
+        flag = 1;
+      }
+    });
+   // if (flag === 0) {
+      basketContext[1]((cart) => [...basketContext[0], prd]);
+    //} else {
+     // alert(`${prd.PRODUCT_NAME.toUpperCase()} is short`);
+    //}
   };
 
   return (
@@ -50,6 +76,7 @@ function Product({product}) {
             <button onClick={()=>setClick(true)} > <p> Add to Cart</p></button>
           } */}
       </div>
+      <ToastContainer autoClose={1400} />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import M from "materialize-css";
 import { useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import "./Employee_Info.css";
@@ -88,27 +87,36 @@ const Product_Info = () => {
           {getSearchData.map((item, index) => {
             return (
               <div className="ui card">
-                <div className="image">
-                  <img src={item.PRODUCT_IMAGE} />
-                </div>
+                <img
+                  src={item.PRODUCT_IMAGE}
+                  style={{ width: "290px", height: "200px" }}
+                />
                 <div className="content">
                   <a className="">{item.PRODUCT_NAME}</a>
                   <div className="meta">
                     <span className="date">{item.PRODUCT_CATEGORY}</span>
                   </div>
-                  <div className="description">{item.PRODUCT_PRICE}</div>
+                  <div className="description">
+                    <span>Price : </span>
+                    {item.PRODUCT_PRICE}
+                  </div>
+                  <div className="description">
+                    <span>Quantity : </span>
+                    {item.PRODUCT_QUANTITY}
+                  </div>
                 </div>
                 <button
                   className="negative ui button"
                   onClick={() => handleDelete(item.PRODUCT_ID)}
                 >
-                  Remove
+                  Remove Product
                 </button>
+                <button className="positive ui button">Request Stock</button>
               </div>
             );
           })}
         </div>
-        <ToastContainer autoClose={1500}/>
+        <ToastContainer autoClose={1500} />
       </div>
     </div>
   );

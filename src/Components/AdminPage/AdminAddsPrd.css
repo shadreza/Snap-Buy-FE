@@ -1,0 +1,12 @@
+.admin-adding-prd {
+    display:  margin;
+    grid-gap: 2rem;
+    padding: 1rem;
+}
+
+.prd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+}

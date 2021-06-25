@@ -30,35 +30,60 @@ function Signup() {
   const register = (e) => {
     e.preventDefault();
     console.log("Last id : ", id);
+    let selected_options = document.getElementById("options").value;
+    console.log("seleected ", selected_options);
     if (
-      id.length === 0 ||
-      name.length === 0 ||
-      mail.length === 0 ||
-      gender.length === 0 ||
-      phone.length === 0 ||
-      house.length === 0 ||
-      street.length === 0 ||
-      postal.length === 0
+      id?.length === 0 ||
+      id === null ||
+      name?.length === 0 ||
+      name === null ||
+      mail?.length === 0 ||
+      mail === null ||
+      gender?.length === 0 ||
+      gender === null ||
+      phone?.length === 0 ||
+      phone === null ||
+      house?.length === 0 ||
+      house === null ||
+      street?.length === 0 ||
+      street === null ||
+      postal?.length === 0 ||
+      postal === null ||
+      selected_options === null ||
+      selected_options?.length === 0
     ) {
       toast.error("Fill up the form properly!!!", { position: "top-center" });
     } else if (
-      gender.trim().toLowerCase() !== "male" ||
-      gender.trim().toLowerCase() !== "female"
+      gender?.trim().toLowerCase() !== "male" ||
+      gender?.trim().toLowerCase() !== "female"
     ) {
       toast.error("Gender can be either male or female ", {
         position: "top-center",
       });
     } else {
-      Axios.post("http://localhost:3001/api/insert", {
-        id: id,
-        name: name.trim().toLowerCase(),
-        mail: mail.trim().toLowerCase(),
-        gender: gender.toLowerCase().trim(),
-        phone: phone.trim().toLowerCase(),
-        house: house.trim().toLowerCase(),
-        street: street.trim().toLowerCase(),
-        postal: postal.trim().toLowerCase(),
-      });
+      if (selected_options === "customer") {
+        Axios.post("http://localhost:3001/api/insert", {
+          id: id,
+          name: name.trim().toLowerCase(),
+          mail: mail.trim().toLowerCase(),
+          gender: gender.toLowerCase().trim(),
+          phone: phone.trim().toLowerCase(),
+          house: house.trim().toLowerCase(),
+          street: street.trim().toLowerCase(),
+          postal: postal.trim().toLowerCase(),
+        });
+      } else if (selected_options === "employee") {
+        Axios.post("http://localhost:3001/api/insert/employee", {
+          id: id,
+          name: name.trim().toLowerCase(),
+          mail: mail.trim().toLowerCase(),
+          designation: "delivery man",
+          phone: phone.trim().toLowerCase(),
+          house: house.trim().toLowerCase(),
+          street: street.trim().toLowerCase(),
+          postal: postal.trim().toLowerCase(),
+        });
+      }
 
       auth
         .createUserWithEmailAndPassword(mail, password)
@@ -161,7 +186,34 @@ function Signup() {
               onChange={(e) => setValue(e.target.value, "password")}
               required
             />
-            
+            <select
+              id="options"
+              name="options"
+              style={{
+                width: "100px",
+                height: "40px",
+                boxShadow: "2px 0px 6px 1px grey",
+                border: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <option value="" style={{ fontWeight: "bold", color: "green" }}>
+                Sign up as*
+              </option>
+              <option
+                value="customer"
+                style={{ fontWeight: "bold", color: "green" }}
+              >
+                Customer
+              </option>
+              <option
+                value="employee"
+                style={{ fontWeight: "bold", color: "green" }}
+              >
+                Employee
+              </option>
+            </select>
+
             <button
               onClick={register}
               className="login__registerButton"

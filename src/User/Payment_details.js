@@ -1,27 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useStateValue } from "../StateProvider";
+import { presentBasket, basket } from "../App";
+import { useHistory } from "react-router-dom";
 
-const Payment_details = () => {
+const Payment_details = ({ checkout }) => {
   const [userDetails, setUserDetails] = useState([]);
+  const history = useHistory();
   const [allCustomer, setAllCustomer] = useState([]);
   const [{ auth, user }, dispatch] = useStateValue();
+  const [getID, setGetID] = useState("");
+
+  const BASKET = useContext(presentBasket);
+  const basketContext = useContext(basket);
+  const [allProduct, setAllProduct] = useState([]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/get/customer/${user}`)
       .then((response) => {
         setUserDetails(response.data);
+        console.log(response.data);
       });
+    console.log("Props :", checkout);
     axios.get("http://localhost:3001/api/get/customer").then((response) => {
       setAllCustomer(response.data);
       console.log(response.data);
     });
+    console.log("basket ", BASKET[0]);
     console.log("User is undefined or not ", user);
   }, []);
 
   const [error, setError] = useState(0);
   const handleSubmit = () => {
+    console.log("This has to be done ", checkout);
     toast.dismiss();
     let card_type = document
       .getElementById("card_type")
@@ -72,23 +85,112 @@ const Payment_details = () => {
     } else if (card_year.length === 0) {
       setError(4);
       toast.error("Please fill up card year ", { position: "top-center" });
-    } 
+    } else if (parseInt(card_year) < 2021) {
+      setError(4);
+      toast.error("Your card is expired ", { position: "top-center" });
+    } else if (parseInt(card_year) === 2021 && parseInt(card_month) < 6) {
+      setError(3);
+      toast.error("Your card is expired ", { position: "top-center" });
+    } else {
+      let count = 0;
+      let price = 0;
+      for (let i = 0; i < BASKET[0].length; i++) {
+        count += BASKET[0][i].qty;
+        price += BASKET[0][i].price;
+      }
+      axios.post("http://localhost:3001/api/insert/order_info", {
+        total_cost: price,
+        quantity: count,
+      });
+      let user_id;
+      allCustomer.map((item) => {
+        if (item.CUST_MAIL === user) {
+          user_id = item.CUST_ID;
+        }
+      });
+      console.log(BASKET[0]);
+      axios.post("http://localhost:3001/api/insert/order_info", {
+        total_cost: price,
+        quantity: count,
+      });
+      axios.get("http://localhost:3001/api/get/order_id").then((response) => {
+        setGetID(response.data[0]);
+      });
+      axios.get(`http://localhost:3001/api/get/customer`).then((response) => {
+        setAllCustomer(response.data);
+      });
+      let cust_id;
+      allCustomer.map((item) => {
+        if (item.CUST_MAIL === user) {
+          cust_id = item.CUST_ID;
+        }
+      });
+      axios.get("http://localhost:3001/api/get/product").then((response) => {
+        setAllProduct(response.data);
+      });
+      let t_price;
+      let qty;
+      for (let i = 0; i < BASKET[0].length; i++) {
+        t_price += BASKET[0][i].price;
+        qty += BASKET[0][i].qty;
+      }
+
+      for (let i = 0; i < BASKET[0].length; i++) {
+        axios.post("http://localhost:3001/api/insert/order_info", {
+          total_cost: t_price,
+          quantity: qty,
+          id:userDetails.CUST_ID,
+        });
+        axios.post("http://localhost:3001/api/insert/buy_cart", {
+          order_id: getID.ORDER_ID,
+          product_id: BASKET[0][i].id,
+          cust_id: cust_id,
+          price: BASKET[0][i].price,
+          product_selected_quantity: BASKET[0][i].qty,
+        });
+        console.log(BASKET[0][i].id, " ", getID.ORDER_ID);
+        let get_qty;
+        allProduct.map((item) => {
+          if (item.PRODUCT_ID === BASKET[0][i].id) {
+            get_qty = item.PRODUCT_QUANTITY;
+          }
+        });
+        console.log(get_qty);
+        console.log(BASKET[0][i].qty);
+        axios.post("http://localhost:3001/api/update/product", {
+          id: BASKET[0][i].id,
+          qty: get_qty - BASKET[0][i].qty,
+
+        });
+      }
+      toast.success("You order has been successfully placed ", {
+        position: "top-center",
+      });
+      alert("Your order has been successfully placed");
+      // BASKET[1]([]);
+      // basketContext[1]([]);
+      history.push("/");
+    }
   };
 
   return (
     <>
       <div className="employee">
-        <h2
-          style={{
-            marginTop: "40px",
-            marginRight: "auto",
-            fontSize: "15px",
-            paddingLeft: "10px",
-            marginBottom: "15px",
-          }}
-        >
-          Shipping Information
-        </h2>
+        {allCustomer.length ? (
+          <h2
+            style={{
+              marginTop: "40px",
+              marginRight: "auto",
+              fontSize: "15px",
+              paddingLeft: "10px",
+              marginBottom: "15px",
+            }}
+          >
+            Shipping Information
+          </h2>
+        ) : (
+          ""
+        )}
         <hr style={{ marginLeft: "20px" }} />
         {allCustomer.map((item) => {
           if (item.CUST_MAIL === user) {

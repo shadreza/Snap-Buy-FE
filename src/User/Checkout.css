@@ -1,0 +1,54 @@
+.basheading
+{
+    text-align: center;
+    padding-bottom: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 40px;
+    
+}
+.checkout-page-main-div
+{
+    margin: auto;
+    padding: 80px;
+}
+.chobi
+{
+    height: 100px;
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.individualPrdCard
+{
+    display: flex;
+    justify-content: space-around;
+}
+.checkout-btn2
+{
+    padding-left: 40%;
+}
+.add {
+    padding: 5px 5px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: fit-content;
+  }
+  
+  .add:hover {background-color: #3e8e41}
+  
+  .add:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import M from "materialize-css";
+import { Card, Toast } from "react-bootstrap";
 import { useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import "./Supplier_Info.css";
@@ -71,14 +72,61 @@ const Supplier_Info = () => {
             Search
           </Button>
         </Input>
-        {getSearchData.map((item) => {
-          return (
-            <div>
-              <h2>{item.SUPPLIER_ID}</h2>
-              <h2>{item.SUPPLIER_NAME}</h2>
-            </div>
-          );
-        })}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {getSearchData.map((item) => {
+            return (
+              <Card
+                style={{
+                  width: "40rem",
+                  boxShadow: "5px 10px 18px #888888",
+                  paddingRight: "30px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "30px",
+                }}
+              >
+                <Card.Body className="cards">
+                  <Card.Title
+                    style={{
+                      textTransform: "capitalize",
+                      fontWeight: "bold",
+                      marginTop: "20px",
+                    }}
+                  >
+                    {item.SUPPLIER_ID + ". " + item.SUPPLIER_NAME}
+                  </Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    <p>
+                      <span style={{ fontWeight: "600" }}> Mail ID </span>
+                      {" :  " + item.SUPPLIER_MAIL}
+                    </p>
+                  </Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    <p>
+                      <span style={{ fontWeight: "600" }}> Phone No. </span>
+                      {" :  " + item.SUPPLIER_PHONE}
+                    </p>
+                  </Card.Subtitle>
+
+                  <Card.Text>
+                    <p>
+                      <span style={{ fontWeight: "600" }}> Address </span>
+                      {" : " +
+                        " " +
+                        item.SUPPLIER_ADDRESS.HOUSE_NO +
+                        " " +
+                        item.SUPPLIER_ADDRESS.STREET_NO +
+                        " " +
+                        item.SUPPLIER_ADDRESS.POSTAL_CODE}
+                    </p>
+                    <br />
+                  </Card.Text>
+                </Card.Body>
+                <br />
+              </Card>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

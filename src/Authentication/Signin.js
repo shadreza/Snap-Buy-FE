@@ -1,12 +1,11 @@
-import React, { useState , useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { auth } from "./firebase";
 import "./Signin.css";
-import {loggedInUser} from "../App"
+import { loggedInUser } from "../App";
 
 function Signin() {
-  
   const userInfo = useContext(loggedInUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,29 +13,52 @@ function Signin() {
 
   const signin = (e) => {
     e.preventDefault();
-    
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
-        console.log(auth.user.email);
-        const USER =  {
-          name       : auth.user.displayName,
-          email      : auth.user.email,
-          phone      : auth.user.phoneNumber,
-          image      : auth.user.photoURL,
-          isSignedIn : true
-        }
-        userInfo[1](USER)
-        history.push("/");
-      })
-      .catch((error) => toast.error(error.message,{position:"top-center"}));
+    let selected_options = document.getElementById("options").value;
+    console.log("selected ", selected_options);
+    if (selected_options === null || selected_options?.length === 0) {
+      toast.error("Please select sign in as ", { position: "top-center" });
+    } else if (selected_options === "customer") {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then((auth) => {
+          console.log(auth.user.email);
+          const USER = {
+            name: auth.user.displayName,
+            email: auth.user.email,
+            phone: auth.user.phoneNumber,
+            image: auth.user.photoURL,
+            isSignedIn: true,
+          };
+          userInfo[1](USER);
+          history.push("/");
+        })
+        .catch((error) =>
+          toast.error(error.message, { position: "top-center" })
+        );
+    } else {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then((auth) => {
+          console.log(auth.user.email);
+          const USER = {
+            name: auth.user.displayName,
+            email: auth.user.email,
+            phone: auth.user.phoneNumber,
+            image: auth.user.photoURL,
+            isSignedIn: true,
+          };
+          userInfo[1](USER);
+          history.push("/info/product");
+        })
+        .catch((error) =>
+          toast.error(error.message, { position: "top-center" })
+        );
+    }
   };
 
   const register = (e) => {
-    history.push("./signup");
+    history.push("/signup");
   };
-
-  
 
   return (
     <div>
@@ -58,6 +80,33 @@ function Signin() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <select
+              id="options"
+              name="options"
+              style={{
+                width: "100px",
+                height: "40px",
+                boxShadow: "2px 0px 6px 1px grey",
+                border: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <option value="" style={{ fontWeight: "bold", color: "green" }}>
+                Sign in as*
+              </option>
+              <option
+                value="customer"
+                style={{ fontWeight: "bold", color: "green" }}
+              >
+                Customer
+              </option>
+              <option
+                value="employee"
+                style={{ fontWeight: "bold", color: "green" }}
+              >
+                Employee
+              </option>
+            </select>
             <button
               type="submit"
               onClick={signin}
@@ -85,7 +134,7 @@ function Signin() {
           </button>
         </div>
       </div>
-      <ToastContainer autoClose={1400}/>
+      <ToastContainer autoClose={1400} />
     </div>
   );
 }
