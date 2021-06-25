@@ -111,7 +111,7 @@ const Product_Info = () => {
                 >
                   Remove Product
                 </button>
-                <button className="positive ui button">Request Product</button>
+                <button className="positive ui button">Request Stock</button>
               </div>
             );
           })}
