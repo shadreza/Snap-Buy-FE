@@ -26,7 +26,6 @@ const Customer = () => {
     if (customer_value.length === 0) {
       toast("Search Something", { position: "top-center" });
     } else {
-      console.log("what i am basically searching is ", customer_value);
       axios
         .get(`http://localhost:3001/api/get/search_customer/${customer_value}`)
         .then((response) => {

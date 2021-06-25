@@ -30,6 +30,7 @@ import Meat_and_Chicken from "./Product/Meat_and_Chicken";
 import Bakery_and_Snacks from "./Product/Bakery_and_Snacks";
 import Popular_Products from "./Product/Popular_Products";
 import AdminAddsPrd from "./Components/AdminPage/AdminAddsPrd";
+import Info from "./Information/Info";
 
 export const search_product_context = createContext();
 export const loggedInUser = createContext();
@@ -99,6 +100,7 @@ function App() {
                 />
                 <Route path="/admin_adds_product" component={AdminAddsPrd} />
                 <Route path="/popular_products" component={Popular_Products} />
+                <Route path="/info" component={Info} />
                 <Route path="/payment" component={Payment_details} />
                 <Route
                   path="/get_cust_name_from_order_id"
